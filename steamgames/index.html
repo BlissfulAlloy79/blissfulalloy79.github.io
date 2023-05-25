@@ -108,7 +108,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -169,7 +169,7 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-bilibili-fill"></i>
-                ACGN
+                <span>ACGN</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
@@ -178,7 +178,7 @@
                   
                   <a class="dropdown-item" href="/bangumis/">
                     <i class="iconfont icon-bilibili-fill"></i>
-                    冻鳗与书籍
+                    <span>冻鳗与书籍</span>
                   </a>
                 
                   
@@ -186,7 +186,7 @@
                   
                   <a class="dropdown-item" href="/steamgames/">
                     <i class="iconfont icon-steam"></i>
-                    Steam
+                    <span>Steam</span>
                   </a>
                 
               </div>
@@ -200,7 +200,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -208,17 +208,33 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
           
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
+		<li class="nav-item">
+			<a class="nav-link" id="translateLink" href="javascript:translatePage();">
+				繁
+			</a>
+			<script type="text/javascript" src="/js/tw_cn.js"></script>
+			<script type="text/javascript">
+			var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+			var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+			var cookieDomain = "https://blissfulalloy79.lazycraft.top"; //Cookie地址, 一定要设定, 通常为你的网址
+			var msgToTraditionalChinese = "繁" //此处可以更改为你想要显示的文字
+			var msgToSimplifiedChinese = "简" //同上，但两处均不建议更改
+			var translateButtonId = "translateLink"; //默认互换id
+			translateInitilization();
+			</script>
+		</li>
       </ul>
     </div>
   </div>
@@ -309,13 +325,14 @@
 }
 
 .steam-game-info {
-  height: 80px;
+  height: 100px;
   padding-left: 204px;
 }
 
 .steam-game-meta {
   font-size: 12px;
   padding-right: 10px;
+  margin-top: 10px;
 }
 
 .steam-game-pagination {
@@ -367,7 +384,7 @@
 }
 
 .steam-game-link {
-  min-height: 50px;
+  min-height: 30px;
 }
 
 @media (max-width:400px) {
@@ -446,367 +463,38 @@
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/218620/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1172470/">Apex Legends</a>
+            <a target="_blank" href="https://store.steampowered.com/app/218620/">PAYDAY 2</a>
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
-                总时数 951 小时
+                总时数 25.6 小时
             </span>
         </div>
     </div>
     <div class="steam-game-link">
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1172470">商店页面</a>
+            href="https://store.steampowered.com/app/218620">商店页面</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1172470">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Apex Legends">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1172470">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1172470">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1172470">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/730/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/CSGO/">Counter-Strike: Global Offensive</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 746 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/CSGO">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/CSGO">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Counter-Strike: Global Offensive">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/CSGO">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=CSGO">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/CSGO">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/359550/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Tom Clancy&#39;s Rainbow Six Siege</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 331 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Tom Clancy&#39;s Rainbow Six Siege">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/620980/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/620980/">Beat Saber</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 39 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/620980">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/620980">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Beat Saber">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/620980">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=620980">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/620980">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/648800/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/648800/">Raft</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 35 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/648800">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/648800">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Raft">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/648800">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=648800">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/648800">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/578080/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/578080/">PUBG: BATTLEGROUNDS</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 31 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/578080">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/578080">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=PUBG: BATTLEGROUNDS">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/578080">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=578080">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/578080">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/218620/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/PAYDAY2/">PAYDAY 2</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 26 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/PAYDAY2">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/PAYDAY2">论坛</a>
+            href="https://store.steampowered.com/forum/218620">论坛</a>
         <a class="steam-game-button" target="_blank"
             href="https://steamcommunity.com/search/groups/?text=PAYDAY 2">查找社区组</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/PAYDAY2">官方网站</a>
+            href="https://store.steampowered.com/appofficialsite/218620">官方网站</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=PAYDAY2">相关新闻</a>
+            href="https://store.steampowered.com/news/?appids=218620">相关新闻</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/PAYDAY2">SteamDB</a>
+            href="https://steamdb.info/app/218620">SteamDB</a>
     </div>
-</div>        
+</div>
+        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1237970/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1237970/">Titanfall® 2</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 21 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1237970">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1237970">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Titanfall® 2">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1237970">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1237970">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1237970">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1088790/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1088790/">Rebel Inc: Escalation</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 10.8 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1088790">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1088790">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Rebel Inc: Escalation">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1088790">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1088790">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1088790">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/397950/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/397950/">Clustertruck</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 7.4 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/397950">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/397950">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Clustertruck">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/397950">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=397950">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/397950">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/714010/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/714010/">Aim Lab</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 7.3 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/714010">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/714010">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Aim Lab">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/714010">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=714010">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/714010">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1408720/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/1408720/">Krunker</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 4.1 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/1408720">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/1408720">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Krunker">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/1408720">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=1408720">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/1408720">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/222880/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/222880/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
@@ -832,251 +520,12 @@
         <a class="steam-game-button" target="_blank"
             href="https://steamdb.info/app/222880">SteamDB</a>
     </div>
-</div>        
+</div>
+        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/617830/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/617830/">SUPERHOT VR</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 3.0 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/617830">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/617830">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=SUPERHOT VR">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/617830">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=617830">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/617830">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1782210/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Crab Game</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 2.4 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Crab Game">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/674940/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/674940/">Stick Fight: The Game</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 1.3 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/674940">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/674940">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Stick Fight: The Game">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/674940">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=674940">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/674940">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/774171/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/774171/">Muse Dash</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 1.1 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/774171">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/774171">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Muse Dash">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/774171">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=774171">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/774171">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1291340/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Townscaper</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 0.9 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Townscaper">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1188540/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Apex Aim Trainer</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 0.5 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Apex Aim Trainer">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/438100/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">VRChat</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 0.5 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=VRChat">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/623990/capsule_184x69.jpg" referrerPolicy="no-referrer" />
-    </div>
-    <div class="steam-game-info">
-        <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Tom Clancy&#39;s Rainbow Six Siege - Test Server</a>
-        </div>
-        <div class="steam-game-meta">
-            <span class="steam-game-info-time">
-                总时数 0.4 小时
-            </span>
-        </div>
-    </div>
-    <div class="steam-game-link">
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamcommunity.com/search/groups/?text=Tom Clancy&#39;s Rainbow Six Siege - Test Server">查找社区组</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
-        <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
-    </div>
-</div>        
-        <div class="steam-game-item">
-    <div class="steam-game-picture"><img
-            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/304050/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/304050/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
@@ -1102,11 +551,260 @@
         <a class="steam-game-button" target="_blank"
             href="https://steamdb.info/app/304050">SteamDB</a>
     </div>
-</div>        
+</div>
+        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/666220/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/359550/">Tom Clancy&#39;s Rainbow Six Siege</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 331.4 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/359550">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/359550">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Tom Clancy&#39;s Rainbow Six Siege">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/359550">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=359550">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/359550">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/623990/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/623990/">Tom Clancy&#39;s Rainbow Six Siege - Test Server</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 0.3 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/623990">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/623990">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Tom Clancy&#39;s Rainbow Six Siege - Test Server">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/623990">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=623990">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/623990">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/431960/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/431960/">Wallpaper Engine</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 45.4 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/431960">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/431960">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Wallpaper Engine">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/431960">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=431960">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/431960">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/438100/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/438100/">VRChat</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 0.5 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/438100">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/438100">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=VRChat">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/438100">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=438100">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/438100">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/397950/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/397950/">Clustertruck</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 8.8 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/397950">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/397950">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Clustertruck">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/397950">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=397950">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/397950">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/730/">Counter-Strike: Global Offensive</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 746.5 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/730">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/730">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Counter-Strike: Global Offensive">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/730">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=730">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/730">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/620980/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/620980/">Beat Saber</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 39.5 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/620980">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/620980">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Beat Saber">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/620980">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=620980">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/620980">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/648800/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/648800/">Raft</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 35.5 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/648800">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/648800">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Raft">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/648800">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=648800">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/648800">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/666220/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
@@ -1132,11 +830,322 @@
         <a class="steam-game-button" target="_blank"
             href="https://steamdb.info/app/666220">SteamDB</a>
     </div>
-</div>        
+</div>
+        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1238810/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/674940/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/674940/">Stick Fight: The Game</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 1.3 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/674940">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/674940">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Stick Fight: The Game">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/674940">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=674940">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/674940">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/774171/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/774171/">Muse Dash</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 1.1 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/774171">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/774171">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Muse Dash">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/774171">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=774171">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/774171">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/714010/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/714010/">Aim Lab</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 7.4 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/714010">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/714010">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Aim Lab">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/714010">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=714010">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/714010">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1088790/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1088790/">Rebel Inc: Escalation</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 12.2 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1088790">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1088790">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Rebel Inc: Escalation">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1088790">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1088790">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1088790">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1172470/">Apex Legends</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 958.8 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1172470">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1172470">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Apex Legends">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1172470">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1172470">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1172470">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1188540/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1188540/">Apex Aim Trainer</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 0.5 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1188540">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1188540">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Apex Aim Trainer">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1188540">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1188540">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1188540">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1237970/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1237970/">Titanfall® 2</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 20.7 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1237970">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1237970">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Titanfall® 2">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1237970">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1237970">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1237970">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1291340/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1291340/">Townscaper</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 0.9 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1291340">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1291340">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Townscaper">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1291340">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1291340">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1291340">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1364020/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1364020/">Boundary</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 6.3 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1364020">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1364020">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Boundary">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1364020">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1364020">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1364020">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1408720/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1408720/">Krunker</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 4.1 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1408720">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1408720">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Krunker">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1408720">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1408720">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1408720">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
@@ -1144,7 +1153,7 @@
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
-                总时数 undefined 小时
+                总时数 0.0 小时
             </span>
         </div>
     </div>
@@ -1162,37 +1171,132 @@
         <a class="steam-game-button" target="_blank"
             href="https://steamdb.info/app/1238810">SteamDB</a>
     </div>
-</div>        
+</div>
+        
         <div class="steam-game-item">
     <div class="steam-game-picture"><img
             src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
-            data-src="https://cdn.akamai.steamstatic.com/steam/apps/1454890/capsule_184x69.jpg" referrerPolicy="no-referrer" />
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1454890/header.jpg" referrerPolicy="no-referrer" />
     </div>
     <div class="steam-game-info">
         <div class="steam-game-title">
-            <a target="_blank" href="https://store.steampowered.com/app/false/">Titanfall™</a>
+            <a target="_blank" href="https://store.steampowered.com/app/1454890/">Titanfall™</a>
         </div>
         <div class="steam-game-meta">
             <span class="steam-game-info-time">
-                总时数 undefined 小时
+                总时数 0.0 小时
             </span>
         </div>
     </div>
     <div class="steam-game-link">
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/app/false">商店页面</a>
+            href="https://store.steampowered.com/app/1454890">商店页面</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/forum/false">论坛</a>
+            href="https://store.steampowered.com/forum/1454890">论坛</a>
         <a class="steam-game-button" target="_blank"
             href="https://steamcommunity.com/search/groups/?text=Titanfall™">查找社区组</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/appofficialsite/false">官方网站</a>
+            href="https://store.steampowered.com/appofficialsite/1454890">官方网站</a>
         <a class="steam-game-button" target="_blank"
-            href="https://store.steampowered.com/news/?appids=false">相关新闻</a>
+            href="https://store.steampowered.com/news/?appids=1454890">相关新闻</a>
         <a class="steam-game-button" target="_blank"
-            href="https://steamdb.info/app/false">SteamDB</a>
+            href="https://steamdb.info/app/1454890">SteamDB</a>
     </div>
-</div>        
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/617830/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/617830/">SUPERHOT VR</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 3.0 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/617830">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/617830">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=SUPERHOT VR">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/617830">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=617830">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/617830">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1782210/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/1782210/">Crab Game</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 2.4 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/1782210">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/1782210">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=Crab Game">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/1782210">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=1782210">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/1782210">SteamDB</a>
+    </div>
+</div>
+        
+        <div class="steam-game-item">
+    <div class="steam-game-picture"><img
+            src="https://steamstore-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" srcset="/img/loading.gif" lazyload
+            data-src="https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg" referrerPolicy="no-referrer" />
+    </div>
+    <div class="steam-game-info">
+        <div class="steam-game-title">
+            <a target="_blank" href="https://store.steampowered.com/app/578080/">PUBG: BATTLEGROUNDS</a>
+        </div>
+        <div class="steam-game-meta">
+            <span class="steam-game-info-time">
+                总时数 30.8 小时
+            </span>
+        </div>
+    </div>
+    <div class="steam-game-link">
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/app/578080">商店页面</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/forum/578080">论坛</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamcommunity.com/search/groups/?text=PUBG: BATTLEGROUNDS">查找社区组</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/appofficialsite/578080">官方网站</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://store.steampowered.com/news/?appids=578080">相关新闻</a>
+        <a class="steam-game-button" target="_blank"
+            href="https://steamdb.info/app/578080">SteamDB</a>
+    </div>
+</div>
+        
         <div class="steam-game-pagination">
     <a class="steam-game-button steam-game-firstpage" href="javascript:;" target="_self" onclick="return false"> 首页</a>
     <a class="steam-game-button steam-game-previouspage" href="javascript:;" target="_self" onclick="return false">上一页</a>
@@ -1384,14 +1488,13 @@ for (var i = 0; i < firstpages.length; i++) {
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
     </div>
   
   
   
   
 </div>
-
   </footer>
 
   <!-- Scripts -->
@@ -1444,10 +1547,7 @@ for (var i = 0; i < firstpages.length; i++) {
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-</body>
+<!-- hexo injector body_end start -->
+<script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="/js/blacklines.js"></script>
+<!-- hexo injector body_end end --></body>
 </html>
-
-<!--动态线条背景-->
-<script type="text/javascript"
-color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="/js/blacklines.js">
-</script>
