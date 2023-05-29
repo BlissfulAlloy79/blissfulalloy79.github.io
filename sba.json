@@ -1,0 +1,200 @@
+{
+    "table_size": 8,
+    "regis_data": {
+        "G00001": {
+            "name": "Davis Chan",
+            "gender": "Male",
+            "seats": 2,
+            "email": "davischan@mail.com",
+            "phone": "+852 46035095",
+            "graduation_year": null,
+            "position": null,
+            "group": "guest_group",
+            "notes": ""
+        },
+        "G00002": {
+            "name": "Clement Tsui",
+            "gender": "Male",
+            "seats": 1,
+            "email": "clementtsui@mail.com",
+            "phone": "+852 57331741",
+            "graduation_year": null,
+            "position": null,
+            "group": "guest_group",
+            "notes": ""
+        },
+        "P00001": {
+            "name": "Erik Meyer",
+            "gender": "Male",
+            "seats": 3,
+            "email": "erik@mail.com",
+            "phone": "+852 44143320",
+            "graduation_year": 2009,
+            "position": null,
+            "group": "class_of_2009",
+            "notes": ""
+        },
+        "P00002": {
+            "name": "Cohen Hogan",
+            "gender": "Male",
+            "seats": 1,
+            "email": "cohenhogan@mail.com",
+            "phone": "+852 84877745",
+            "graduation_year": 2009,
+            "position": null,
+            "group": "class_of_2009",
+            "notes": ""
+        },
+        "P00003": {
+            "name": "Oliver Mcdonald",
+            "gender": "Male",
+            "seats": 1,
+            "email": "olivermcdonald@mail.com",
+            "phone": "+852 57343677",
+            "graduation_year": 2009,
+            "position": null,
+            "group": "class_of_2009",
+            "notes": ""
+        },
+        "P00004": {
+            "name": "Joshua Porter",
+            "gender": "Male",
+            "seats": 1,
+            "email": "joshuaporter@mail.com",
+            "phone": "+852 46403995",
+            "graduation_year": 2009,
+            "position": null,
+            "group": "class_of_2009",
+            "notes": ""
+        },
+        "P00005": {
+            "name": "Chad James",
+            "gender": "Male",
+            "seats": 1,
+            "email": "chadjames@mail.com",
+            "phone": "+852 57353193",
+            "graduation_year": 2009,
+            "position": null,
+            "group": "class_of_2009",
+            "notes": ""
+        },
+        "S00001": {
+            "name": "Student one",
+            "gender": "Male",
+            "seats": 4,
+            "email": "student1@mail.com",
+            "phone": "+852 12345678",
+            "graduation_year": 2018,
+            "position": null,
+            "group": "class_of_2018",
+            "notes": ""
+        },
+        "S00002": {
+            "name": "Student two",
+            "gender": "Female",
+            "seats": 1,
+            "email": "student2@mail.com",
+            "phone": "+852 12348765",
+            "graduation_year": 2024,
+            "position": null,
+            "group": "class_of_2024",
+            "notes": ""
+        },
+        "S00003": {
+            "name": "Student three",
+            "gender": "Male",
+            "seats": 1,
+            "email": "student3@mail.com",
+            "phone": "+852 12345566",
+            "graduation_year": 2018,
+            "position": null,
+            "group": "class_of_2018",
+            "notes": ""
+        },
+        "S00004": {
+            "name": "Student four",
+            "gender": "Male",
+            "seats": 1,
+            "email": "student4@mail.com",
+            "phone": "+852 12345577",
+            "graduation_year": 2018,
+            "position": null,
+            "group": "class_of_2018",
+            "notes": ""
+        },
+        "S00005": {
+            "name": "Student five",
+            "gender": "Female",
+            "seats": 1,
+            "email": "student5@mail.com",
+            "phone": "+852 12348787",
+            "graduation_year": 2024,
+            "position": null,
+            "group": "class_of_2024",
+            "notes": ""
+        },
+        "T00001": {
+            "name": "Chris Lee",
+            "gender": "Male",
+            "seats": 1,
+            "email": "chrislee@mail.com",
+            "phone": "+852 68886290",
+            "graduation_year": null,
+            "position": "Teacher",
+            "group": "group_Teacher",
+            "notes": ""
+        }
+    },
+    "grouping_data": {
+        "guest_group": [
+            "G00001",
+            "G00002"
+        ],
+        "class_of_2009": [
+            "P00001",
+            "P00002",
+            "P00003",
+            "P00004",
+            "P00005"
+        ],
+        "class_of_2018": [
+            "S00001",
+            "S00003",
+            "S00004"
+        ],
+        "class_of_2024": [
+            "S00002",
+            "S00005"
+        ],
+        "group_Teacher": [
+            "T00001"
+        ]
+    },
+    "table_arrangement": {
+        "table_1": [
+            "P00001_1",
+            "P00001_2",
+            "P00001_3",
+            "P00002_1",
+            "P00003_1",
+            "P00004_1",
+            "P00005_1",
+            "T00001_1"
+        ],
+        "table_2": [
+            "S00001_1",
+            "S00001_2",
+            "S00001_3",
+            "S00001_4",
+            "S00003_1",
+            "S00004_1",
+            "S00002_1",
+            "S00005_1"
+        ],
+        "table_3": [
+            "G00001_1",
+            "G00001_2",
+            "G00002_1"
+        ]
+    }
+}

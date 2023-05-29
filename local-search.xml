@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>利用 Notion 制作规划表</title>
+    <link href="/06-notionplanner/"/>
+    <url>/06-notionplanner/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>使用 Notion 独有的简易 Database 来制作规划表</p></blockquote><span id="more"></span><p>参考自 <a href="https://thomasfrank.notion.site/Ultimate-Tasks-for-Notion-4d33fcd22458489698d2eb14a293bbba">Thomas Frank 的 Ultimate Tasks for Notion</a></p><p>最终效果如下：<br><img src="/img/06-notionplanner/notion_planner_sample.png" alt="最终效果"></p><h1>创建 Task Database</h1><p>在一个规划表里，项目/任务（Task）是一个基本单位。</p><p>用户的交互页面只是把所有 Task 进行了归类使得整个操作更加人性化</p><ol><li class="lvl-3"><p>在 Notion 里新建一个文件，选择 Table</p></li><li class="lvl-3"><p>此时只是创建了一个新的 Table view，我们还需要到右边的 data source 里新建一个 database</p></li><li class="lvl-3"><p>这样，这份文件才会是 database 的形式</p></li><li class="lvl-3"><p>重命名这份文件，个人来说我会用 “Tasks”</p></li></ol><p>至此，前期准备完毕 ヾ(￣▽￣)</p><h2 id="添加-Properties">添加 Properties</h2><h3 id="Checkbox">Checkbox</h3><p>在每项 item 前面添加一个 checkbox，用于判定此 item 是否完成</p><p>在这个 table 的 heading 一栏最右边有个加号 “+”，点击新建 properties</p><p>然后选择             <input type="checkbox" disabled checked="checked">checkbox          </p><p>Property name 实在没有必要，可以删掉留空</p><h3 id="Due-date">Due date</h3><p>新建一个 Date property，名叫 Due</p><p>这样就可以记录这个 item 的截止日期了</p><h1>创建规划表交互页面</h1><p>同样，新建一个普通 Page 文件</p><p>交互页面应该有三个区域，分别为：</p><ul class="lvl-0"><li class="lvl-2"><p>Views：这里将所有 Task 按照 due date 分类</p></li><li class="lvl-2"><p>Projects：项目分类，我这里用的是学校科目</p></li><li class="lvl-2"><p>Calendar：日历，所有有 due date 的 task 将会在这里按照日历显示</p></li></ul><h2 id="Views">Views</h2><p><img src="/img/06-notionplanner/views.png" alt="Views"></p><p>先创建一个 Toggle list（/toggle list），这样如果你不想看到这个列表的话可以收起来</p><p>在每个 item 里创建一个 Page（/page），这里我先以 Inbox 为例</p><p>来到 Inbox 的 Page，选择 Table</p><p>Data source 就选择刚刚创建的 database “Tasks”</p><p>现在在 Inbox 的页面应该会显示一个 table，内容就是 “Tasks”</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Notion</tag>
+      
+      <tag>Planner</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hexo 个人美化合集</title>
     <link href="/05-hexodeco/"/>
     <url>/05-hexodeco/</url>
