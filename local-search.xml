@@ -4,27 +4,6 @@
   
   
   <entry>
-    <title>开服时各种疑难杂症合集</title>
-    <link href="/06-serverproblems/"/>
-    <url>/06-serverproblems/</url>
-    
-    <content type="html"><![CDATA[<p>开服时所遇到的各种奇奇怪怪的大小问题</p><span id="more"></span><h1>序</h1><blockquote><p>就像我在<a href="https://blissfulalloy79.lazycraft.top/about/#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%EF%BC%9A" title="关于博客">关于博客</a>里所说的，内容以分享经验为主</p><p>当了那么久腐竹，一定会遇到不少疑难杂症，但不少都是些奇奇怪怪的小问题并且年代久远，久而久之就忘了该如何解决</p><p>所以这个合集的目的就是做一个收录，把遇到的情况和解决方案留下来，下次遇到同样的就不用再花时间去慢慢 debug</p></blockquote><h1>服务器控制台以及日志无法正确显示中文</h1><h2 id="情况">情况</h2><p>控制台以及日志可以正确显示中文，但是某些时候还是会变成 <code>?</code> 或者其他错误字符</p><p><img src="/img/06-serverproblems/console_language.png" alt="示例"></p><p>这个图片中发送的是 <code>测试</code> ，但在控制台中却显示为 <code>??</code></p><p>同时，上面的字段证明了控制台是可以显示中文</p><h2 id="成因">成因</h2><p>其实这是 Windows 系统默认编码造成的</p><p>在上面那个示例中，系统是 Windows Server，安装语言为英文</p><p>安装系统语言是英文的话默认编码就不是 <code>utf-8</code>，而是其他的编码</p><p>不过在截图中能看到，上方程序的编码解码已经设置为 <code>utf-8</code> ，但是为何下面的中文仍然无法正确显示</p><p>其实这是一个误解</p><p>上方的输出属于 MCDR ，而最下面那行是 mc 服务器的输出，二者并非同一程序，编码规则当然毫无关联</p><p>只是 MCDR 的编码设置为 <code>utf-8</code> ，而 mc 服务器的话并没有指定，当调用系统默认编码时不是  unicode 的话自然就无法正确显示中文</p><h2 id="修复">修复</h2><p>前往 <code>控制面板</code> -&gt; <code>更改日期，时间或数字格式</code> -&gt; <code>管理</code> -&gt; <code>更改系统区域设置...</code></p><p>勾取 <code>Beta版：使用 Unicode UTF-8 提供全球语言支持</code></p><p>英文系统也是对应的：</p><p><code>Control Panel</code> -&gt; <code>Change date, time, or number formats</code> -&gt; <code>Administrative</code> -&gt; <code>Change system locale...</code></p><p>勾取 <code>Beta: Use Unicode UTF-8 for worldwide language support</code></p><p>重启系统</p><p>问题解决</p><p>现在控制台应该能正常显示中文或者其他语言了 q(≧▽≦q)</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>合集</tag>
-      
-      <tag>服务器</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Hexo 个人美化合集</title>
     <link href="/05-hexodeco/"/>
     <url>/05-hexodeco/</url>
