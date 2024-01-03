@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blissfulalloy79.github.io/img/05-hexodeco/hexo.jpg">
 <meta property="article:published_time" content="2023-02-07T12:52:48.000Z">
-<meta property="article:modified_time" content="2023-10-20T10:12:29.039Z">
+<meta property="article:modified_time" content="2024-01-03T15:50:04.226Z">
 <meta property="article:author" content="BlissfulAlloy79">
 <meta property="article:tag" content="合集">
 <meta property="article:tag" content="Blog">
@@ -73,7 +73,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blissfulalloy79.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"blissfulalloy79.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -117,7 +117,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -129,7 +129,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -141,7 +141,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -153,7 +153,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -165,7 +165,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -187,7 +187,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/bangumis/">
+                  <a class="dropdown-item" href="/bangumis/" target="_self">
                     <i class="iconfont icon-bilibili-fill"></i>
                     <span>冻鳗与书籍</span>
                   </a>
@@ -195,7 +195,7 @@
                   
                   
                   
-                  <a class="dropdown-item" href="/steamgames/">
+                  <a class="dropdown-item" href="/steamgames/" target="_self">
                     <i class="iconfont icon-steam"></i>
                     <span>Steam</span>
                   </a>
@@ -209,7 +209,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -231,21 +231,6 @@
             </a>
           </li>
         
-		<li class="nav-item">
-			<a class="nav-link" id="translateLink" href="javascript:translatePage();">
-				繁
-			</a>
-			<script type="text/javascript" src="/js/tw_cn.js"></script>
-			<script type="text/javascript">
-			var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
-			var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-			var cookieDomain = "https://blissfulalloy79.lazycraft.top"; //Cookie地址, 一定要设定, 通常为你的网址
-			var msgToTraditionalChinese = "繁" //此处可以更改为你想要显示的文字
-			var msgToSimplifiedChinese = "简" //同上，但两处均不建议更改
-			var translateButtonId = "translateLink"; //默认互换id
-			translateInitilization();
-			</script>
-		</li>
       </ul>
     </div>
   </div>
@@ -268,6 +253,11 @@
           
   <div class="mt-3">
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        BlissfulAlloy79
+      </span>
+    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
@@ -283,7 +273,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          19k 字
+          894 字
         
       </span>
     
@@ -294,7 +284,7 @@
         
         
         
-          160 分钟
+          8 分钟
         
       </span>
     
@@ -339,13 +329,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Hexo 个人美化合集</h1>
+            <h1 id="seo-header">Hexo 个人美化合集</h1>
             
-              <p class="note note-info">
+              <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于：2023年10月20日 晚上
+                    本文最后更新于 2024年1月3日 晚上
                   
                 
               </p>
@@ -445,6 +434,28 @@
             <p>UI 上面有小 bug，点击切换之后指针悬浮颜色渐变效果会消失，需要点击页面其他地方（空白也行）一次才动画效果会再次出现</p>
           </div>
 <p>如果有大佬知道如何解决的，欢迎评论建议 (～￣▽￣)～</p>
+<h1>文章字数统计忽略代码块</h1>
+<div class="note note-info">
+            <p>此方法是基于 fluid 主题的 <code>wordcound.js</code> 修改，可能不适用於其他主题这里使用的版本是 fluid 1.9.7</p>
+          </div>
+<div class="note note-warning">
+            <p>此方法对于原版入侵性较大，可能会影响主题升级</p>
+          </div>
+<p>前往博客根目录的 <code>\themes\fluid\scripts\helpers\wordcount.js</code></p>
+<p>1.9.7 的版本更新了<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/commit/c7a2ae1613c0ab8b3adcb68ce133df420a8e7db8">字数统计合计中英文 #1024</a>，所以 <code>getWordCount</code> 函数应该长这个样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">getWordCount</span> = (<span class="hljs-params">post</span>) =&gt; &#123;<br>  <span class="hljs-comment">// post.origin is the original post content of hexo-blog-encrypt</span><br>  <span class="hljs-keyword">const</span> content = <span class="hljs-title function_">stripHTML</span>(post.<span class="hljs-property">origin</span> || post.<span class="hljs-property">content</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\r?\n|\r/g</span>, <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\s+/g</span>, <span class="hljs-string">&#x27;&#x27;</span>);<br><br>  <span class="hljs-keyword">if</span> (!post.<span class="hljs-property">wordcount</span>) &#123;<br>    <span class="hljs-keyword">const</span> zhCount = (content.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/[\u4E00-\u9FA5]/g</span>) || []).<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">const</span> enCount = (content.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/[\u4E00-\u9FA5]/g</span>, <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/[a-zA-Z0-9_\u0392-\u03c9\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af\u0400-\u04FF]+|[\u00E4\u00C4\u00E5\u00C5\u00F6\u00D6]+|\w+/g</span>) || []).<span class="hljs-property">length</span>;<br>    post.<span class="hljs-property">wordcount</span> = zhCount + enCount<br>  &#125;<br>  <span class="hljs-keyword">return</span> post.<span class="hljs-property">wordcount</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>我们只需要在 <code>stripHTML</code> 之前把内容中带有 “highlight” 开头的 <code>figure</code> tag 移除即可</p>
+<blockquote>
+<p>此处 regex 借助 ChatGPT 生成</p>
+<p>实际上，应该是此处代码分析 + 写基本上都是靠 ChatGPT</p>
+<p>本人 javascript 萌新，啥也不会 ¯_(ツ)_/¯</p>
+</blockquote>
+<p>魔改的 content 表达式部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 先将 post.origin || post.content 提取出来</span><br><span class="hljs-keyword">const</span> c = post.<span class="hljs-property">origin</span> || post.<span class="hljs-property">content</span>;<br><span class="hljs-comment">// post.origin is the original post content of hexo-blog-encrypt</span><br><span class="hljs-comment">// 在 stripHTML 之前，利用 regex 把带有 highlight 开头的 figure tag 移除</span><br><span class="hljs-keyword">const</span> content = <span class="hljs-title function_">stripHTML</span>(c.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/&lt;figure class=&quot;highlight[^&gt;]*&gt;([\s\S]*?)&lt;\/figure&gt;/g</span>, <span class="hljs-string">&#x27;&#x27;</span>)).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\r?\n|\r/g</span>, <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\s+/g</span>, <span class="hljs-string">&#x27;&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>这样字数统计应该是相对更加准确了</p>
+<div class="note note-warning">
+            <p>注意：此博客使用的是 highlight js，若使用其他生成高亮的库可能会使用不同的 tag 以及名称未必使用 highligh 开头</p><p>请自行研究生成的 html 来修改 regex</p>
+          </div>
 
                 
               </div>
@@ -457,11 +468,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%90%88%E9%9B%86/">#合集</a>
+        <a href="/tags/%E5%90%88%E9%9B%86/" class="print-no-link">#合集</a>
       
-        <a href="/tags/Blog/">#Blog</a>
+        <a href="/tags/Blog/" class="print-no-link">#Blog</a>
       
-        <a href="/tags/Hexo/">#Hexo</a>
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
       
     </div>
   
@@ -490,21 +501,23 @@
         </div>
       
       
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
             
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
+          </div>
         </div>
-      </div>
+      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -538,8 +551,10 @@
             </div>
 
             
-  <article id="comments" lazyload>
-    
+  
+  
+    <article id="comments" lazyload>
+      
   <div id="waline"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#waline', function() {
@@ -564,7 +579,8 @@
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-  </article>
+    </article>
+  
 
 
           </article>
@@ -666,6 +682,7 @@
   
   
 </div>
+
   </footer>
 
   <!-- Scripts -->
@@ -766,6 +783,21 @@
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
 
