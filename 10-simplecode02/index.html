@@ -1,0 +1,1154 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="BlissfulAlloy79">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="javascript 初见——随便写的时间表爬取脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随手搓 02：学校时间表爬取">
+<meta property="og:url" content="https://blissfulalloy79.github.io/10-simplecode02/index.html">
+<meta property="og:site_name" content="BlissfulAlloy&#39;s Blog">
+<meta property="og:description" content="javascript 初见——随便写的时间表爬取脚本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blissfulalloy79.github.io/img/10-simplecode02/logo.png">
+<meta property="article:published_time" content="2023-11-24T10:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-04T16:45:09.994Z">
+<meta property="article:author" content="BlissfulAlloy79">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="随手搓">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blissfulalloy79.github.io/img/10-simplecode02/logo.png">
+  
+  
+  
+  <title>随手搓 02：学校时间表爬取 - BlissfulAlloy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blissfulalloy79.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BlissfulAlloy79&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-bilibili-fill"></i>
+                <span>ACGN</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/bangumis/" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>冻鳗与书籍</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/steamgames/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>Steam</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/10-simplecode02/banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="随手搓 02：学校时间表爬取"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        BlissfulAlloy79
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-24 18:00" pubdate>
+          2023年11月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">随手搓 02：学校时间表爬取</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年1月5日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>javascript 初见——随便写的时间表爬取脚本</p>
+<span id="more"></span>
+<h1>序</h1>
+<p>先来交代下背景 (～￣▽￣)～</p>
+<p>咱校不知道去年抽什么风，把一直沿用的星期制时间表换成了 Cycle 制，一个 Cycle 有 6 天</p>
+<p>也就是说，每星期多出来的那一天会往后延，如此类推</p>
+<p>虽然说学校还特别「贴心」的弄了个时间表网站，好让我们随时能查看日程表</p>
+<p>但是负责这个的老师似乎不是很分得清生产以及测试环境的区别，导致开学刚上线的那段时间非常不稳定，十次访问有六七次是掉线的，而每次掉线都是他在更新些不知道啥 ￣へ￣</p>
+<p>不稳定还是其次吧，毕竟老师也不是专业搞这个的，还是得体谅体谅，主要是太不方便了，每次使用得多一个登录的步骤</p>
+<p>前段时间翻邮箱时看到来自 <a target="_blank" rel="noopener" href="https://notion.cafe/#/">Notion Cafe</a> 的通知，突然灵光乍现——</p>
+<p>对吼，可以爬取网页解析成 <code>.ics</code> 文件，这样就可以将日程表导入到原生日历软件里了 (^^ゞ</p>
+<blockquote>
+<p>Notion Cafe 是一个在线服务，它可以定时爬取你的 Notion database 并提供一个订阅日历来更新</p>
+<p>这样就做到一个 Notion 和日历同步的效果</p>
+</blockquote>
+<p>于是就有了这个这个 repo</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/BlissfulAlloy79/wyhk-timetable-exporter">https://github.com/BlissfulAlloy79/wyhk-timetable-exporter</a></p>
+<p>这个脚本主要是通过用户登录过的 cookie 来做新的 requests</p>
+<p>再通过 icalendar 库转成 <code>.ics</code> 文件</p>
+<p>就酱。。。</p>
+<p>。。。</p>
+<p>。。。</p>
+<p>(。_。)</p>
+<p><s>哈哈又可以水一篇文力</s></p>
+<p>你以为这样就水一篇了吗？</p>
+<p>人总不能一直呆在自己的舒适圈嘛， 于是从未接触过 javascript 的我决定是时候学习一下新的玩意力 (/▽＼)</p>
+<p><s>主要是这个不用一晚上就写完的脚本实在是太水了</s></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/BlissfulAlloy79/wyhk-timetable-exporter-js">https://github.com/BlissfulAlloy79/wyhk-timetable-exporter-js</a></p>
+<p>脚本是 userscript，利用 tampermonkey 在浏览器上运行</p>
+<h1>时间表网页解析</h1>
+<p>来看看学校时间表网页背后到底在做些啥吧</p>
+<p>开启 Chrome F12，打开时间表网页，看看都有些啥网络活动</p>
+<p><img src="/img/10-simplecode02/network_activity.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>简单地过了一下，流程大概是这样</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>首先向登录的 login api 发送 POST 请求，提交帐号名称、密码以及 recaptcha 返回值（对没错，这玩意有 captcha ㄟ( ▔, ▔ )ㄏ）</p>
+</li>
+<li class="lvl-2">
+<p>login api 验证了客户端的 cookie，并且给予了一个 token 的过期期限</p>
+</li>
+<li class="lvl-2">
+<p>之后的任何请求都是基于这个已验证的 cookie</p>
+</li>
+</ul>
+<p>而在之后的请求如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>calendar，获取全年日程表</p>
+</li>
+<li class="lvl-2">
+<p>user，获取用户资料</p>
+</li>
+<li class="lvl-2">
+<p>year-and-term，通过日期获得当前学年以及学期</p>
+</li>
+<li class="lvl-2">
+<p>student-timetable，通过学生 id，学年以及学期获取课程表</p>
+</li>
+<li class="lvl-2">
+<p>student-events，通过日期获取当日活动</p>
+</li>
+</ul>
+<h2 id="api-calendar">/api/calendar</h2>
+<p>获取全年日程表</p>
+<p>发送 GET 请求到 calendar api 直接返回了一整年的安排，每一个日期都有对应的天数以及 Cycle 数</p>
+<p>没有 payload</p>
+<p>举几个例子</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>	<span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;Date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-01T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Non Cycle Day&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Cycle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Day&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDay&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-05T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Display&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;H&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    ...<br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;Date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-02T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Week End&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Cycle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Day&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDay&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-05T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Display&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;H&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    ...<br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;Date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-05T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Cycle Day&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Cycle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Day&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDay&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;NextDate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2023-09-06T00:00:00.000Z&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;H&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Display&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;H&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;Icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    ...<br>    ...<br>    ...<br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<p>嗯。。。十分暴力</p>
+<h2 id="api-user">/api/user</h2>
+<p>获取用户信息</p>
+<p>没有 payload，直接由服务器返回用户 id 以及 role （角色？）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s12345&quot;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;student&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<h2 id="api-year-and-term">/api/year-and-term</h2>
+<p>通过日期返回学年以及学期</p>
+<p>payload 是 query，直接 encode 在 URL 里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">?Thu%20Dec%2028%202023%2022:06:47%20GMT+0800%20(China%20Standard%20Time)<br></code></pre></td></tr></table></figure>
+<p>返回学年以及学期</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>	<span class="hljs-punctuation">&#123;</span><br>		<span class="hljs-attr">&quot;Sch_Year&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2023</span><span class="hljs-punctuation">,</span><br>		<span class="hljs-attr">&quot;Term&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><br>	<span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<h2 id="api-student-timetable">/api/student-timetable</h2>
+<p>获取学生课程表</p>
+<p>也是 query，URL encode</p>
+<p>payload 中包含了刚刚返回的学年以及学期，以及用户 id</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">?year=2023&amp;term=2&amp;student=12345<br></code></pre></td></tr></table></figure>
+<p>返回例子</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;Day&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;P1_Subj&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Maths&quot;</span><span class="hljs-punctuation">,</span><br>        ...<br>        <span class="hljs-attr">&quot;P10_Subj&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CS&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;P1_Teacher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>        ...<br>        <span class="hljs-attr">&quot;P10_Teacher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;P1_Rm&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Rm 6Y&quot;</span><span class="hljs-punctuation">,</span><br>        ...<br>        <span class="hljs-attr">&quot;P10_Rm&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Rm 6Y&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>	    <span class="hljs-attr">&quot;Day&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span><br>	    ...<br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    ...<br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<h2 id="api-student-events">/api/student-events</h2>
+<p>获取当日活动</p>
+<p>GET 请求的 payload 中需要添加当日日期，相对应的就会返回当日 event，可以为空</p>
+<p>同样是 query</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">?date=2023-12-05<br></code></pre></td></tr></table></figure>
+<p>返回例子</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>	<span class="hljs-punctuation">&#123;</span><br>		<span class="hljs-attr">&quot;Events&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;1) Mid-year Examination for F.1-5 (Day 2)&quot;</span><br>	<span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<h1>大致逻辑</h1>
+<p>有了以上资料，要进行解析并输出成 <code>.ics</code> 文件其实很简单，基本没有技术含量</p>
+<p>（我一开始还以为要解析 html，看来是多虑了 ╮(╯-╰)╭</p>
+<p>我设想中应该是输出俩个 <code>.ics</code> 文件，一个储存 Cycle 和当天信息，以 fullday event 来表示</p>
+<p>另一个则是储存每一天的课程表</p>
+<h2 id="日程表（Calendar-ics）">日程表（Calendar.ics）</h2>
+<p>这个 <code>.ics</code> 文件中储存的是每日的 Cycle 数、天数以及当日活动</p>
+<p>实现逻辑应该是最简单的了，暴力循环</p>
+<p>calendar api 的返回值是一个列表，每个 item 则是当天的信息（这里我叫他 metadata</p>
+<p>从 metadata 中可以提取 Cycle 数以及天数</p>
+<p>当日活动的话就只能暴力请求 student-events api  (￣y▽,￣)╭</p>
+<p>有多少天就发多少个请求</p>
+<p><s>希望学校防火墙别 ban 我（</s></p>
+<h2 id="课程表（Timetable-ics）">课程表（Timetable.ics）</h2>
+<p>时间表的实现反而就比较棘手</p>
+<p>首先，本质上也是基于 calendar api 返回值的暴力循环</p>
+<p>要做的则是对 metadata 做筛选，比如说只有上学日才需要创建时间表</p>
+<p>以及要对全日制和半日制做一个简单的区分</p>
+<blockquote>
+<p>没错捏，这学校居然有时候是上半天，有时候则是全天</p>
+<p>我上了快六年学都没搞明白分这个全日和半日制的理由（</p>
+</blockquote>
+<h1>代码实践</h1>
+<p>理论存在，实践开始 （￣︶￣）↗</p>
+<h2 id="限制">限制</h2>
+<p>首先，这个是 userscript，也就是说不能调用库（也不是说不能而是很麻烦，<s>而我是为了避免当前麻烦而制造更多麻烦的人</s>），只能用基本的 javascript 功能</p>
+<p>不能像 python 那样直接调用 icalendar 库来自动整合 <code>ics</code> 格式了 /_ \</p>
+<h2 id="如何插入-javascript">如何插入 javascript</h2>
+<p>在直接写到 tampermonkey 的 userscript editor 之前，我是先用 chrome 自带的 Snippets 编辑器来写基本功能，最后才整合到 userscirpt 里</p>
+<p>里面写的代码可以直接在网站上运行，非常方便，而且 IDE 做的还算可以</p>
+<p>至于其他 IDE 例如 VSCode 等，我不认为这种随手搓的脚本需要用到那些编辑器</p>
+<p>方便就够了 （〃｀ 3′〃）</p>
+<blockquote>
+<p>Snippets 可以在 DevTools -&gt; Sources 里找到</p>
+<p>新建一个 Snippets，就可以开始敲键盘力</p>
+</blockquote>
+<h2 id="手搓-icalendar-格式整合">手搓 icalendar 格式整合</h2>
+<p>应该一个 class 就能搞定</p>
+<p>这个 class 只有俩个功能要实现：events 输入以及最后整合输出</p>
+<p>这里参考了一下这个远古时期的脚本</p>
+<p><a target="_blank" rel="noopener" href="https://greasyfork.org/en/scripts/395824-student-cafe-timetable-downloader/code">https://greasyfork.org/en/scripts/395824-student-cafe-timetable-downloader/code</a></p>
+<p>我也不知道怎么找到的（</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Calendar</span> &#123;<br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>	    <span class="hljs-comment">// 一些常量声明</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> = <span class="hljs-string">&#x27;\r\n&#x27;</span>;<br>	    <span class="hljs-comment">// icalendar 文件头尾</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> = [<br>            <span class="hljs-string">&quot;BEGIN:VCALENDAR&quot;</span>,<br>            <span class="hljs-string">&quot;VERSION:2.0&quot;</span>,<br>            <span class="hljs-string">&quot;PRODID:-//WYHK TIMETABLE EXPORTER//Blissfulalloy79//&quot;</span><br>        ].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>);<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span> = <span class="hljs-string">&#x27;END:VCALENDAR&#x27;</span>;<br>        <span class="hljs-comment">// 储存 events</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span> = [];<br>    &#125;<br><br>	<span class="hljs-comment">// 日期解析，把标准 ISO 格式转化成 icalendar 的日期格式</span><br>    <span class="hljs-title function_">dateParse</span>(<span class="hljs-params">d, fullday</span>) &#123;<br>        <span class="hljs-comment">// it only takes ISO 8601 format strings :(</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> fullday !== <span class="hljs-string">&#x27;boolean&#x27;</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;dateParse function type error!&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">var</span> regex = <span class="hljs-regexp">/(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)T(\d&#123;2&#125;):(\d&#123;2&#125;)/</span>;<br>        <span class="hljs-keyword">var</span> p = d.<span class="hljs-title function_">match</span>(regex);<br><br>        <span class="hljs-keyword">if</span> (fullday) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span> + p[<span class="hljs-number">1</span>] + p[<span class="hljs-number">2</span>] + p[<span class="hljs-number">3</span>];<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> p[<span class="hljs-number">1</span>] + p[<span class="hljs-number">2</span>] + p[<span class="hljs-number">3</span>] + <span class="hljs-string">&quot;T&quot;</span> + p[<span class="hljs-number">4</span>] + p[<span class="hljs-number">5</span>] + <span class="hljs-string">&quot;00&quot;</span>;<br>        &#125;<br><br>    &#125;<br>    <br>	<span class="hljs-comment">// 参考的主要是这个函数，虽然我自己现在都不是太看得出来参考了啥（</span><br>	<span class="hljs-comment">// 这个函数吃最基本的 icalendar event 项目</span><br>	<span class="hljs-comment">// 起始时间，结束时间，时间戳，event 名称，event 描述</span><br>	<span class="hljs-comment">// 最后的是否 fullday 是用来专门处理全天 event，icalendar 文件里面这种项目的时间日期格式有一点点不同</span><br>    <span class="hljs-title function_">addEvent</span>(<span class="hljs-params">dtstart, dtend, dtstamp, summary, notes, fullday</span>) &#123;<br>        notes = notes || <span class="hljs-string">&#x27;&#x27;</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> dtstart === <span class="hljs-string">&#x27;undefined&#x27;</span> ||<br>            <span class="hljs-keyword">typeof</span> dtend === <span class="hljs-string">&#x27;undefined&#x27;</span> ||<br>            <span class="hljs-keyword">typeof</span> dtstamp === <span class="hljs-string">&#x27;undefined&#x27;</span> ||<br>            <span class="hljs-keyword">typeof</span> summary === <span class="hljs-string">&#x27;undefined&#x27;</span> ||<br>            <span class="hljs-keyword">typeof</span> fullday !== <span class="hljs-string">&#x27;boolean&#x27;</span><br>           ) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>           &#125;<br><br>        dtstart = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">dateParse</span>(dtstart, fullday);<br>        dtend = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">dateParse</span>(dtend, fullday);<br>        dtstamp = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">dateParse</span>(dtstamp, fullday);<br><br>        <span class="hljs-keyword">var</span> calEvent = [<br>                <span class="hljs-string">&quot;BEGIN:VEVENT&quot;</span>,<br>                <span class="hljs-string">&quot;SUMMARY:&quot;</span> + summary,<br>                <span class="hljs-string">&quot;DESCRIPTION:&quot;</span> + notes,<br>                <span class="hljs-string">&quot;DTSTART:&quot;</span> + dtstart,<br>                <span class="hljs-string">&quot;DTEND:&quot;</span> + dtend,<br>                <span class="hljs-string">&quot;DTSTAMP:&quot;</span> + dtstamp,<br>                <span class="hljs-string">&quot;END:VEVENT&quot;</span><br>            ].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>);<br><br>        <span class="hljs-keyword">if</span> (fullday) &#123; <span class="hljs-comment">// 专门为全天 event 做单独处理</span><br>            calEvent = [<br>                <span class="hljs-string">&quot;BEGIN:VEVENT&quot;</span>,<br>                <span class="hljs-string">&quot;SUMMARY:&quot;</span> + summary,<br>                <span class="hljs-string">&quot;DESCRIPTION:&quot;</span> + notes,<br>                <span class="hljs-string">&quot;DTSTART;VALUE=DATE:&quot;</span> + dtstart,<br>                <span class="hljs-string">&quot;DTEND;VALUE=DATE:&quot;</span> + dtend,<br>                <span class="hljs-string">&quot;DTSTAMP;VALUE=DATE:&quot;</span> + dtstamp,<br>                <span class="hljs-string">&quot;END:VEVENT&quot;</span><br>            ].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>);<br>        &#125;<br><br>		<span class="hljs-comment">// 添加到 events 列表中</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">push</span>(calEvent);<br>        <span class="hljs-keyword">return</span> calEvent;<br>    &#125;<br><br>    <span class="hljs-title function_">getEvents</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>;<br>    &#125;<br><br>    <span class="hljs-title function_">download</span>(<span class="hljs-params">filename</span>) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Download failed!\nThe event list is empty&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>		<span class="hljs-comment">// 整合并输出</span><br>        filename = (<span class="hljs-keyword">typeof</span> filename !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? filename : <span class="hljs-string">&#x27;calendar&#x27;</span>;<br>        <span class="hljs-keyword">const</span> calendar_content = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span>;<br><br>		<span class="hljs-comment">// 使用 blob 来暂存内容，并使用 url 执行下载操作</span><br>        <span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Blob</span>([calendar_content], &#123;<br>            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;text/calendar&quot;</span><br>        &#125;);<br><br>        <span class="hljs-keyword">const</span> link = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br>        link.<span class="hljs-property">href</span> = <span class="hljs-variable constant_">URL</span>.<span class="hljs-title function_">createObjectURL</span>(blob);<br><br>		link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.ics`</span>);<br>        link.<span class="hljs-title function_">click</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="XHR-请求">XHR 请求</h2>
+<p>javascript 不像 python 那样有专门的 requests 库来处理请求</p>
+<p>如果仔细观察网络活动那张图的话，就会发现这些请求都是属于 ”xhr“ 类型</p>
+<p>什么是 xhr ？</p>
+<p>XHR（全称 XMLHttpRequest）是 javascript 常用于处理 http 请求的函数</p>
+<p>同时，这个是一个 async 函数</p>
+<p>依赖 chatGPT，我们有了一个 xhr 请求的函数封装 (。・ω・。)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-params">rtype, url</span>) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> rtype !== <span class="hljs-string">&#x27;string&#x27;</span> || <span class="hljs-keyword">typeof</span> url !== <span class="hljs-string">&#x27;string&#x27;</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Parameter type error!&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">const</span> xhr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>();<br>    xhr.<span class="hljs-title function_">open</span>(rtype, url, <span class="hljs-literal">true</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) &#123;<br>        xhr.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>            <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">readyState</span> === <span class="hljs-title class_">XMLHttpRequest</span>.<span class="hljs-property">DONE</span>) &#123;<br>                <span class="hljs-keyword">if</span> (xhr.<span class="hljs-property">status</span> === <span class="hljs-number">200</span>) &#123;<br>                    <span class="hljs-title function_">resolve</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(xhr.<span class="hljs-property">responseText</span>));<br>                &#125;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;&quot;</span> + url + <span class="hljs-string">&quot; request failed with status&quot;</span>, xhr.<span class="hljs-property">status</span>));<br>                &#125;<br>            &#125;<br>        &#125;;<br>    xhr.<span class="hljs-title function_">send</span>();<br>    &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>作为一个 async 函数但是在 declare 的时候不用在前面写 async？</p>
+<p>这是因为它的 return 是一个 Promise，在 javascript 中默认就是 async</p>
+<p>神不神奇（不明觉历</p>
+<h2 id="日程表">日程表</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取全年日程表</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getCalendar</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/calendar&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (error) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error);<br>        <span class="hljs-keyword">return</span> error;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getEventOTD</span>(<span class="hljs-params">date</span>) &#123;<br>    <span class="hljs-keyword">const</span> d = date.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Getting event of the day: &quot;</span> + d);<br><br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">const</span> r = <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/student-events?date=&quot;</span> + d);<br>        <span class="hljs-keyword">if</span> (r.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> r[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;Events&quot;</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (error) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error);<br>        <span class="hljs-keyword">return</span> error;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>getEventOTD</code> 中 <code>date</code> 的输入是 <code>&quot;2023-09-05T00:00:00.000Z&quot;</code></p>
+<p>所以要通过 <code>date.slice(0, 10)</code> 来提取头 10 位字符，也就是 <code>2023-09-05</code></p>
+<p>如果当日没有活动，服务器会返回一个空的列表，而不是字符串，所以当列表长度为零时要单独返回空字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">exportCalendar</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> scal = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getCalendar</span>();<br>    <span class="hljs-keyword">const</span> calendar = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Calendar</span>();<br>    <span class="hljs-comment">// 遍历全年日程表</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> <span class="hljs-title class_">Day</span> <span class="hljs-keyword">of</span> scal) &#123;<br>        <span class="hljs-keyword">var</span> d = <span class="hljs-title class_">Day</span>[<span class="hljs-string">&quot;Date&quot;</span>];<br>        <span class="hljs-keyword">var</span> order = (<span class="hljs-title class_">Day</span>[<span class="hljs-string">&quot;Display&quot;</span>] == <span class="hljs-string">&quot;H&quot;</span>) ? <span class="hljs-string">&quot;(Half-day)&quot;</span> : <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">var</span> summary;<br>        <span class="hljs-keyword">switch</span> (<span class="hljs-title class_">Day</span>[<span class="hljs-string">&quot;Type&quot;</span>]) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Cycle Day&quot;</span>:<br>	            <span class="hljs-comment">// 编排正常上课日的 event 名</span><br>	            <span class="hljs-comment">// 样例：Day 1, Cycle 1</span><br>                summary = <span class="hljs-string">&quot;Day &quot;</span> + <span class="hljs-title class_">Day</span>[<span class="hljs-string">&quot;Day&quot;</span>] + <span class="hljs-string">&quot;, Cycle &quot;</span> + <span class="hljs-title class_">Day</span>[<span class="hljs-string">&quot;Cycle&quot;</span>] + <span class="hljs-string">&quot; &quot;</span> + order;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Non Cycle Day&quot;</span>:<br>                summary = <span class="hljs-string">&quot;Non Cycle Day&quot;</span>;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;School Holiday&quot;</span>:<br>                summary = <span class="hljs-string">&quot;School Holiday&quot;</span>;<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-attr">default</span>:<br>                <span class="hljs-keyword">continue</span>;<br>        &#125;<br>        <span class="hljs-comment">// 尝试获取当日活动</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">const</span> event_otd = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getEventOTD</span>(d);<br>            calendar.<span class="hljs-title function_">addEvent</span>(d, d, d, summary, event_otd, <span class="hljs-literal">true</span>);<br>        &#125;<br>        <span class="hljs-keyword">catch</span> (error) &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;Error retrieving event of $&#123;d&#125;&quot;</span>, error);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calendar.<span class="hljs-title function_">getEvents</span>());<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Finished creating &quot;</span> + calendar.<span class="hljs-title function_">getEvents</span>().<span class="hljs-property">length</span> + <span class="hljs-string">&quot; calendar events&quot;</span>);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Exporting...&quot;</span>);<br>	<span class="hljs-comment">// 输出时间表</span><br>    calendar.<span class="hljs-title function_">download</span>(<span class="hljs-string">&quot;Annual calendar&quot;</span>);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Done!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看起来还行，尝试运行一下</p>
+<p><img src="/img/10-simplecode02/calendar_ics_download.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>Chrome 上面看起来运作正常，那就试试在 iPad 上的 Safari 跑跑看</p>
+<p><img src="/img/10-simplecode02/safari_download_error.png" srcset="/img/loading.gif" lazyload alt="" title="我忘截图了，图是来自 Apple Community"></p>
+<p>嗯？</p>
+<p>为啥 Safari 就出问题了</p>
+<h2 id="针对-Safari-的下载优化">针对 Safari 的下载优化</h2>
+<p>我以为会是像普通下载文件那样跳出一个下载确认窗口</p>
+<p>但他只会报无法下载文件</p>
+<p>不就是文件吗，为啥无法下载？</p>
+<p>这个问题卡了我好久，在 Stackoverflow 上找了一下以为是 blob 的问题，于是我就尝试了下用 <code>encodeURIComponent</code> 把整个文件 encode 到 URI 里</p>
+<p>用 ChatGPT 生成的代码测试一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">exportTextToFile</span>(<span class="hljs-params">text, filename</span>) &#123;<br>  <span class="hljs-keyword">const</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br>  <span class="hljs-comment">// 把内容 encode 到 URI 里</span><br>  element.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;href&#x27;</span>, <span class="hljs-string">&#x27;data:text/plain;charset=utf-8,&#x27;</span> + <span class="hljs-built_in">encodeURIComponent</span>(text));<br>  element.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;download&#x27;</span>, filename);<br><br>  element.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(element);<br><br>  element.<span class="hljs-title function_">click</span>();<br><br>  <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">removeChild</span>(element);<br>&#125;<br><span class="hljs-keyword">const</span> myText = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>;<br><span class="hljs-keyword">const</span> myFilename = <span class="hljs-string">&#x27;myFile.txt&#x27;</span>;<br><br><span class="hljs-title function_">exportTextToFile</span>(myText, myFilename);<br></code></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/10-simplecode02/safari_download_confirm.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>不错，在 Safari 上能用了</p>
+<p>这时候再把 <code>data:text/plain;</code> 换成 <code>data:text/calendar</code> 并 integrate 到原本的 download 函数里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">download</span>(<span class="hljs-params">filename</span>) &#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Download failed!\nThe event list is empty&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br><br>	<span class="hljs-comment">// 整合并输出</span><br>	filename = (<span class="hljs-keyword">typeof</span> filename !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? filename : <span class="hljs-string">&#x27;calendar&#x27;</span>;<br>	<span class="hljs-keyword">const</span> calendar_content = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span>;<br><br>	<span class="hljs-keyword">const</span> link = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br><br>	<span class="hljs-comment">// 这里使用的是 encodeURIComponent，不是 blob</span><br>	element.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;href&#x27;</span>, <span class="hljs-string">&#x27;data:text/calendar;charset=utf-8,&#x27;</span> + <span class="hljs-built_in">encodeURIComponent</span>(text));<br><br>	link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.ics`</span>);<br>	link.<span class="hljs-title function_">click</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>尝试运行一下</p>
+<p><img src="/img/10-simplecode02/safari_download_error.png" srcset="/img/loading.gif" lazyload alt="" title="我忘截图了，图是来自 Apple Community"></p>
+<p>怎么把 <code>data:text/plain</code> 换成 <code>data:text/calendar</code> 就不行了？</p>
+<p>明明刚刚的测试代码都没问题</p>
+<p>百思不得其解。。。</p>
+<p>￣へ￣</p>
+<p>就是下个文件啊，为啥 Safari 那么麻烦</p>
+<p>。。。</p>
+<p>诶，</p>
+<p><code>.ics</code> 文件，<code>URI encode</code>，我似乎想起来什么</p>
+<p>我之前下过一个 shortcut，是专门将 <code>.ics</code> 文件导入到 Apple Calendar 的</p>
+<blockquote>
+<p>没错，神奇的果果，能打开 <code>.ics</code> 文件但是没办法直接导入到 Apple Calendar 里</p>
+<p>唯一的方法就是用 <em>自带的 Mail</em> 收到 <code>.ics</code> 文件为附件，才能导入</p>
+<p>是不是很离谱？(ノへ￣、)</p>
+<p>不过好在有民间大神开发了个 shortcut，让 <code>.ics</code> 文件可以直接导入到 Apple Calendar</p>
+<p>链接我放<a target="_blank" rel="noopener" href="https://routinehub.co/user/8isnothing">这里</a></p>
+</blockquote>
+<p>这个 shortcut，原理就是把 <code>.ics</code> 文件内容 encode 成 URI 并在 Safari 里打开</p>
+<p><img src="/img/10-simplecode02/ics_to_cal_shortcut.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>注意看中间的那几步，它首先将 input 文件转成了 <code>Event.txt</code> 再将这些 plain text 进行 URI encode</p>
+<p>也就是说。。。</p>
+<p>只要把文件名改成 <code>.txt</code> 后缀就行了吗？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">download</span>(<span class="hljs-params">filename</span>) &#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Download failed!\nThe event list is empty&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br><br>	filename = (<span class="hljs-keyword">typeof</span> filename !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? filename : <span class="hljs-string">&#x27;calendar&#x27;</span>;<br>	<span class="hljs-keyword">const</span> calendar_content = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span>;<br><br>	<span class="hljs-keyword">const</span> link = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br><br>	element.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;href&#x27;</span>, <span class="hljs-string">&#x27;data:text/calendar;charset=utf-8,&#x27;</span> + <span class="hljs-built_in">encodeURIComponent</span>(text));<br><br>	<span class="hljs-comment">// 这里改成 .txt 后缀</span><br>	link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.txt`</span>);<br>	link.<span class="hljs-title function_">click</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>再次尝试运行脚本</p>
+<p>真的诶，沃德发？？？</p>
+<p><img src="/img/10-simplecode02/safari_calendar_failed.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>还不是下载文件，是直接 import 到 Apple Calendar 里</p>
+<p>一石二鸟 ˋ( ° ▽、° )</p>
+<p>话又说回来</p>
+<p>也就是说，问题并不在 javascript 的 blob 里，而是在 encode 成 URI 时候的文件格式</p>
+<p>那就回到之前的几步，试试用回 blob</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">download</span>(<span class="hljs-params">filename</span>) &#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Download failed!\nThe event list is empty&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br><br>	filename = (<span class="hljs-keyword">typeof</span> filename !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? filename : <span class="hljs-string">&#x27;calendar&#x27;</span>;<br>	<span class="hljs-keyword">const</span> calendar_content = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span>;<br><br>	<span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Blob</span>([calendar_content], &#123;<br>		<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;text/calendar&quot;</span><br>	&#125;);<br><br>	<span class="hljs-keyword">const</span> link = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br>	link.<span class="hljs-property">href</span> = <span class="hljs-variable constant_">URL</span>.<span class="hljs-title function_">createObjectURL</span>(blob);<br><br>	link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.txt`</span>);<br><br>	link.<span class="hljs-title function_">click</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果</p>
+<p><img src="/img/10-simplecode02/safari_calendar_failed.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>真的诶？问题就处在文件格式里</p>
+<p>真有你的果果 （￣︶￣</p>
+<p>现在只要加多一个判断是否为 Safari 浏览器就好了</p>
+<p>照样参考 chatGPT =￣ω￣=</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">download</span>(<span class="hljs-params">filename</span>) &#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>) &#123;<br>		<span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Download failed!\nThe event list is empty&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br><br>	filename = (<span class="hljs-keyword">typeof</span> filename !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? filename : <span class="hljs-string">&#x27;calendar&#x27;</span>;<br>	<span class="hljs-keyword">const</span> calendar_content = <span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEvents</span>.<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>) + <span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">calEnd</span>;<br><br>	<span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Blob</span>([calendar_content], &#123;<br>		<span class="hljs-attr">type</span>: <span class="hljs-string">&quot;text/calendar&quot;</span><br>	&#125;);<br><br>	<span class="hljs-keyword">const</span> link = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;a&#x27;</span>);<br>	link.<span class="hljs-property">href</span> = <span class="hljs-variable constant_">URL</span>.<span class="hljs-title function_">createObjectURL</span>(blob);<br><br>	<span class="hljs-comment">// Safari 浏览器检查表达式</span><br>	<span class="hljs-keyword">const</span> isSafari = <span class="hljs-regexp">/^((?!chrome|android).)*safari/i</span>.<span class="hljs-title function_">test</span>(navigator.<span class="hljs-property">userAgent</span>);<br>	<span class="hljs-keyword">if</span> (isSafari) &#123;<br>		<span class="hljs-comment">// 如果是 Safari，文件后缀为 .txt</span><br>		link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.txt`</span>);<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-comment">// 非 Safari 则后缀依旧保留 .ics</span><br>		link.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;download&quot;</span>, <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.ics`</span>);<br>	&#125;<br><br>	link.<span class="hljs-title function_">click</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>到这里，基本的 icalendar 格式整合以及输出就完成了 ヾ(•ω•`)o</p>
+<p>。。。</p>
+<p>对吧。。。</p>
+<p>把生成好的 iCal 文件导入到 Calendar 里</p>
+<p><img src="/img/10-simplecode02/calendar_failed.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>？？？</p>
+<p>怎么少了几天</p>
+<p>10 月 3，10 和 11 都不见了</p>
+<p>不止这三天，某些日期的 event 也不见了</p>
+<p>这些都不是周末，而且控制台日志显示这些日期是有创建的啊</p>
+<h2 id="反斜杠处理">反斜杠处理</h2>
+<p>作为对比，我一开始用 Python 库写的脚本却能正确导出所有 events，没有任何缺失</p>
+<p><img src="/img/10-simplecode02/calendar_success.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>实在不知道是什么原因导致的，我只好打开 <code>Calendar.ics</code> 文件查看内容格式是否有问题</p>
+<p>以下是我用 Python 库生成的文件（正常）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs icalendar">BEGIN:VEVENT<br>SUMMARY:Day 4\, Cycle 3<br>DTSTART;VALUE=DATE:20231003<br>DTEND;VALUE=DATE:20231003<br>DTSTAMP;VALUE=DATE:20231003<br>DESCRIPTION:1) Publicity Days &amp; recruitment for SA Clubs / Societies &amp; Sch<br> ool Organizations (lunchtime &amp; after school)\n2) F.1 Music Instrumental Tr<br> aining Classes starts<br>END:VEVENT<br>...<br>BEGIN:VEVENT<br>SUMMARY:Day 3\, Cycle 4<br>DTSTART;VALUE=DATE:20231010<br>DTEND;VALUE=DATE:20231010<br>DTSTAMP;VALUE=DATE:20231010<br>DESCRIPTION:1) Data Entry of OLE record for F.1-5 in the Homeroom period\n<br> 2) Flexible periods (please refer to a separate schedule) - Data Entry of <br> OLE record for F.1-5<br>END:VEVENT<br>BEGIN:VEVENT<br>SUMMARY:Day 4\, Cycle 4<br>DTSTART;VALUE=DATE:20231011<br>DTEND;VALUE=DATE:20231011<br>DTSTAMP;VALUE=DATE:20231011<br>DESCRIPTION:1) Data Entry of OLE record for F.1-5 in the Homeroom period\n<br> 2) Inter-School Swimming Competition\, Day 1 – Division One (Kowloon Par<br> k Swimming Pool)<br>END:VEVENT<br></code></pre></td></tr></table></figure>
+<p>而这是我现在有问题的 <code>Calendar.ics</code> 文件（不正常）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs ical">BEGIN:VEVENT<br>SUMMARY:Day 4, Cycle 3 <br>DESCRIPTION:1) Publicity Days &amp; recruitment for SA Clubs / Societies &amp; School Organizations (lunchtime &amp; after school)<br>2) F.1 Music Instrumental Training Classes starts<br>DTSTART;VALUE=DATE:20231003<br>DTEND;VALUE=DATE:20231003<br>DTSTAMP;VALUE=DATE:20231003<br>END:VEVENT<br>...<br>BEGIN:VEVENT<br>SUMMARY:Day 3, Cycle 4 <br>DESCRIPTION:1) Data Entry of OLE record for F.1-5 in the Homeroom period<br>2) Flexible periods (please refer to a separate schedule) - Data Entry of OLE record for F.1-5<br>DTSTART;VALUE=DATE:20231010<br>DTEND;VALUE=DATE:20231010<br>DTSTAMP;VALUE=DATE:20231010<br>END:VEVENT<br>BEGIN:VEVENT<br>SUMMARY:Day 4, Cycle 4 <br>DESCRIPTION:1) Data Entry of OLE record for F.1-5 in the Homeroom period<br>2) Inter-School Swimming Competition, Day 1 – Division One (Kowloon Park Swimming Pool)<br>DTSTART;VALUE=DATE:20231011<br>DTEND;VALUE=DATE:20231011<br>DTSTAMP;VALUE=DATE:20231011<br>END:VEVENT<br></code></pre></td></tr></table></figure>
+<p>不知道有没有留意到，正常那个文件的 description 是以 <code>\n</code> 来分割项目</p>
+<p>我们来参考一下 api 的返回结果</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;Events&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1) Data Entry of OLE record for F.1-5 in the Homeroom period\r\n2) Flexible periods (please refer to a separate schedule) - Data Entry of OLE record for F.1-5&quot;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<p>可见，本身的返回结果就是以 <code>\n</code> 作为行分割</p>
+<p>而我在做格式整合的时候也是用 <code>\n</code> 做行分割</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span> = <span class="hljs-string">&#x27;\r\n&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// icalendar 文件头</span><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">calHeader</span> = [<br>	<span class="hljs-string">&quot;BEGIN:VCALENDAR&quot;</span>,<br>	<span class="hljs-string">&quot;VERSION:2.0&quot;</span>,<br>	<span class="hljs-string">&quot;PRODID:-//WYHK TIMETABLE EXPORTER//Blissfulalloy79//&quot;</span><br>].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>); <span class="hljs-comment">// 这里</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> calEvent = [<br>		<span class="hljs-string">&quot;BEGIN:VEVENT&quot;</span>,<br>		<span class="hljs-string">&quot;SUMMARY:&quot;</span> + summary,<br>		<span class="hljs-string">&quot;DESCRIPTION:&quot;</span> + notes,<br>		<span class="hljs-string">&quot;DTSTART:&quot;</span> + dtstart,<br>		<span class="hljs-string">&quot;DTEND:&quot;</span> + dtend,<br>		<span class="hljs-string">&quot;DTSTAMP:&quot;</span> + dtstamp,<br>		<span class="hljs-string">&quot;END:VEVENT&quot;</span><br>	].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>); <span class="hljs-comment">// 和这里</span><br><br><span class="hljs-keyword">if</span> (fullday) &#123; <span class="hljs-comment">// 专门为全天 event 做单独处理</span><br>	calEvent = [<br>		<span class="hljs-string">&quot;BEGIN:VEVENT&quot;</span>,<br>		<span class="hljs-string">&quot;SUMMARY:&quot;</span> + summary,<br>		<span class="hljs-string">&quot;DESCRIPTION:&quot;</span> + notes,<br>		<span class="hljs-string">&quot;DTSTART;VALUE=DATE:&quot;</span> + dtstart,<br>		<span class="hljs-string">&quot;DTEND;VALUE=DATE:&quot;</span> + dtend,<br>		<span class="hljs-string">&quot;DTSTAMP;VALUE=DATE:&quot;</span> + dtstamp,<br>		<span class="hljs-string">&quot;END:VEVENT&quot;</span><br>	].<span class="hljs-title function_">join</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">SEPARATOR</span>); <span class="hljs-comment">// 还有这里</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>写入 <code>DESCRIPTION</code> 的时候没有专门保留 <code>\n</code> 换行</p>
+<p>就导致日历软件解码的时候无法正确 parse 这个 event</p>
+<p>最后这些无法正确被 parse 的 event 就没被读取到</p>
+<p>要怎么解决呢？方法也很简单</p>
+<p><code>getEventOTD</code> 这个函数返回时把 <code>\n</code> 换成 <code>\\n</code> 就好了</p>
+<p>加个 <code>replace(/\r\n/g, &quot;\\n&quot;);</code>解决</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getEventOTD</span>(<span class="hljs-params">date</span>) &#123;<br>    <span class="hljs-keyword">const</span> d = date.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Getting event of the day: &quot;</span> + d);<br><br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">const</span> r = <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/student-events?date=&quot;</span> + d);<br>        <span class="hljs-keyword">if</span> (r.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> r[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;Events&quot;</span>].<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/\r\n/g</span>, <span class="hljs-string">&quot;\\n&quot;</span>); <span class="hljs-comment">// 保留 \n</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (error) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error);<br>        <span class="hljs-keyword">return</span> error;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>测试一下</p>
+<p><img src="/img/10-simplecode02/calendar_success.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>搞腚！</p>
+<blockquote>
+<p>当然，如果你也像我这么无聊去翻 iCalendar 标准的话，你会发现即使纠正过的格式并不完全正确 －O－</p>
+<p>标准格式是<a target="_blank" rel="noopener" href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000394.shtml#:~:text=An%20iCalendar%20file%20consists%20of,as%20defined%20in%20RFC%205234.">这里</a>所指的：</p>
+<ul class="lvl-1">
+<li class="lvl-2">
+<p>每行不超过 75 个 8 位字节</p>
+</li>
+<li class="lvl-2">
+<p>以 CRLF 定界</p>
+</li>
+</ul>
+<p>可以看到我用 python 库生成的 <code>.ics</code> 文件完全符合规定</p>
+<p>而 javascript 手搓的格式整合几乎不符合规定，但依然可用？</p>
+<p>我认为是现在日历软件读取 <code>.ics</code> 文件的时候容错相对较高，不会太在意一行是否多于 8 位字节</p>
+<p>加上如果把有问题的放到 <a target="_blank" rel="noopener" href="https://icalendar.org/validator.html">https://icalendar.org/validator.html</a> 上去测试，它也只是报 warning 而不是 error (。・∀・)ノ</p>
+<p>反正是随手写的，就不要在意这些小细节啦（逃</p>
+</blockquote>
+<h2 id="课程表">课程表</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取时间表</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getTimetable</span>(<span class="hljs-params">year, term, student</span>) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> year !== <span class="hljs-string">&#x27;string&#x27;</span> || <span class="hljs-keyword">typeof</span> term !== <span class="hljs-string">&#x27;string&#x27;</span> || <span class="hljs-keyword">typeof</span> student !== <span class="hljs-string">&#x27;string&#x27;</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Parameter type error!&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/student-timetable?year=&quot;</span> + year + <span class="hljs-string">&quot;&amp;term=&quot;</span> + term + <span class="hljs-string">&quot;&amp;student=&quot;</span> + student);<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (error) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error);<br>        <span class="hljs-keyword">return</span> error;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">exportTimetable</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-comment">// --- 常量声明和获取 ---</span><br>	<span class="hljs-comment">// 以下分别为全日制上下课时间以及半日制上下课时间</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">FDAY_START</span> = [<span class="hljs-string">&quot;08:15&quot;</span>, <span class="hljs-string">&quot;08:55&quot;</span>, <span class="hljs-string">&quot;09:50&quot;</span>, <span class="hljs-string">&quot;10:30&quot;</span>, <span class="hljs-string">&quot;11:25&quot;</span>, <span class="hljs-string">&quot;12:05&quot;</span>, <span class="hljs-string">&quot;14:05&quot;</span>, <span class="hljs-string">&quot;14:10&quot;</span>, <span class="hljs-string">&quot;14:20&quot;</span>, <span class="hljs-string">&quot;15:00&quot;</span>];<br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">FDAY_END</span> = [<span class="hljs-string">&quot;08:55&quot;</span>, <span class="hljs-string">&quot;09:35&quot;</span>, <span class="hljs-string">&quot;10:30&quot;</span>, <span class="hljs-string">&quot;11:10&quot;</span>, <span class="hljs-string">&quot;12:05&quot;</span>, <span class="hljs-string">&quot;12:45&quot;</span>, <span class="hljs-string">&quot;14:10&quot;</span>, <span class="hljs-string">&quot;14:20&quot;</span>, <span class="hljs-string">&quot;15:00&quot;</span>, <span class="hljs-string">&quot;15:40&quot;</span>];<br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">HDAY_START</span> = [<span class="hljs-string">&quot;08:10&quot;</span>, <span class="hljs-string">&quot;08:45&quot;</span>, <span class="hljs-string">&quot;09:30&quot;</span>, <span class="hljs-string">&quot;10:05&quot;</span>, <span class="hljs-string">&quot;10:55&quot;</span>, <span class="hljs-string">&quot;11:30&quot;</span>, <span class="hljs-string">&quot;12:15&quot;</span>, <span class="hljs-string">&quot;12:50&quot;</span>, <span class="hljs-string">&quot;13:25&quot;</span>];<br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">HDAY_END</span> = [<span class="hljs-string">&quot;08:45&quot;</span>, <span class="hljs-string">&quot;09:20&quot;</span>, <span class="hljs-string">&quot;10:05&quot;</span>, <span class="hljs-string">&quot;10:40&quot;</span>, <span class="hljs-string">&quot;11:30&quot;</span>, <span class="hljs-string">&quot;12:05&quot;</span>, <span class="hljs-string">&quot;12:50&quot;</span>, <span class="hljs-string">&quot;13:25&quot;</span>, <span class="hljs-string">&quot;13:35&quot;</span>];<br>    <br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">SCAL</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getCalendar</span>();<br>    <span class="hljs-keyword">const</span> calendar = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Calendar</span>();<br>    <span class="hljs-keyword">var</span> sid = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">var</span> year = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">var</span> term = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>	    <span class="hljs-comment">// 尝试获取用户信息</span><br>        <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/user&quot;</span>);<br>        sid = user[<span class="hljs-string">&quot;username&quot;</span>].<span class="hljs-title function_">slice</span>(-<span class="hljs-number">5</span>);<br>        <span class="hljs-keyword">const</span> tdy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toString</span>();<br>        <span class="hljs-comment">// 尝试获取当前学年以及学期</span><br>        <span class="hljs-keyword">const</span> ynt = <span class="hljs-keyword">await</span> <span class="hljs-title function_">xhr</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&quot;https://www.wahyan.edu.hk/timetable-api/api/year-and-term?date=&quot;</span> + <span class="hljs-built_in">escape</span>(tdy));<br>        year = ynt[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;Sch_Year&quot;</span>].<span class="hljs-title function_">toString</span>();<br>        term = ynt[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;Term&quot;</span>].<span class="hljs-title function_">toString</span>();<br>    &#125;<br>    <span class="hljs-keyword">catch</span> (error) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Error getting data&quot;</span>, error);<br>    &#125;<br>    <span class="hljs-comment">// 利用刚刚获取的三个信息请求课程表</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TIMETABLE</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getTimetable</span>(year, term, sid);<br>    <br>    <span class="hljs-comment">// --- 主要功能部分 ---</span><br>    <span class="hljs-comment">// 遍历日程表</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> <span class="hljs-variable constant_">SCAL</span>) &#123;<br>	    <span class="hljs-comment">// 排除非上课日</span><br>        <span class="hljs-keyword">if</span> (item[<span class="hljs-string">&quot;Type&quot;</span>] != <span class="hljs-string">&quot;Cycle Day&quot;</span>) &#123;<br>            <span class="hljs-keyword">continue</span>;<br>        &#125;<br>        <span class="hljs-comment">// 判断全日/半日制</span><br>        <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">ORDER</span> = item[<span class="hljs-string">&quot;Display&quot;</span>];<br>        <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">DATE</span> = item[<span class="hljs-string">&quot;Date&quot;</span>].<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);<br>        <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">LESSON_OTD</span> = <span class="hljs-variable constant_">TIMETABLE</span>[item[<span class="hljs-string">&quot;Day&quot;</span>] - <span class="hljs-number">1</span>];<br>        <span class="hljs-comment">// 全日制</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable constant_">ORDER</span> == <span class="hljs-string">&quot;F&quot;</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i ++) &#123;<br>                <span class="hljs-keyword">let</span> summary = <span class="hljs-variable constant_">LESSON_OTD</span>[<span class="hljs-string">`P<span class="hljs-subst">$&#123;i&#125;</span>_Subj`</span>];<br>                <span class="hljs-keyword">let</span> dtstart = <span class="hljs-variable constant_">DATE</span> + <span class="hljs-string">&quot;T&quot;</span> + <span class="hljs-variable constant_">FDAY_START</span>[i - <span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">let</span> dtstamp = dtstart;<br>                <span class="hljs-keyword">let</span> dtend = <span class="hljs-variable constant_">DATE</span> + <span class="hljs-string">&quot;T&quot;</span> + <span class="hljs-variable constant_">FDAY_END</span>[i - <span class="hljs-number">1</span>];<br>                calendar.<span class="hljs-title function_">addEvent</span>(dtstart, dtend, dtstamp, summary, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">false</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 半日制</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-variable constant_">ORDER</span> == <span class="hljs-string">&quot;H&quot;</span>) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i ++) &#123;<br>                <span class="hljs-keyword">let</span> summary = <span class="hljs-variable constant_">LESSON_OTD</span>[<span class="hljs-string">`P<span class="hljs-subst">$&#123;i&#125;</span>_Subj`</span>];<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">7</span> || i == <span class="hljs-number">8</span>) &#123;<br>                    summary = <span class="hljs-variable constant_">LESSON_OTD</span>[<span class="hljs-string">`P<span class="hljs-subst">$&#123;i + <span class="hljs-number">2</span>&#125;</span>_Subj`</span>];<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i == <span class="hljs-number">9</span>) &#123;<br>                    summary = <span class="hljs-variable constant_">LESSON_OTD</span>[<span class="hljs-string">&quot;P7_Subj&quot;</span>] + <span class="hljs-string">&quot; &amp; &quot;</span> + <span class="hljs-variable constant_">LESSON_OTD</span>[<span class="hljs-string">&quot;P8_Subj&quot;</span>];<br>                &#125;<br>                <span class="hljs-keyword">let</span> dtstart = <span class="hljs-variable constant_">DATE</span> + <span class="hljs-string">&quot;T&quot;</span> + <span class="hljs-variable constant_">HDAY_START</span>[i - <span class="hljs-number">1</span>];<br>                <span class="hljs-keyword">let</span> dtstamp = dtstart;<br>                <span class="hljs-keyword">let</span> dtend = <span class="hljs-variable constant_">DATE</span> + <span class="hljs-string">&quot;T&quot;</span> + <span class="hljs-variable constant_">HDAY_END</span>[i - <span class="hljs-number">1</span>];<br>                calendar.<span class="hljs-title function_">addEvent</span>(dtstart, dtend, dtstamp, summary, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">false</span>);<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calendar.<span class="hljs-title function_">getEvents</span>());<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Finished creating &quot;</span> + calendar.<span class="hljs-title function_">getEvents</span>().<span class="hljs-property">length</span> + <span class="hljs-string">&quot; lesson events&quot;</span>);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Exporting...&quot;</span>);<br><br>    calendar.<span class="hljs-title function_">download</span>(<span class="hljs-string">&quot;Lesson timetable&quot;</span>);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Done!&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所有功能性问题都在写日程表的时候排除了，因此没什么 bug</p>
+<p>好了，功能部分写完，咱可以进入下一个阶段了</p>
+<h2 id="前端元素插入">前端元素插入</h2>
+<p>总得有个用户能交互的地方罢</p>
+<p>正好，时间表上半部分的功能交互部分就有些空隙可以让我插入元素</p>
+<p><img src="/img/10-simplecode02/timetable_top.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>右边的那些 dropdown menu 不就留了些空位给我吗</p>
+<p>F12，启动！</p>
+<p><img src="/img/10-simplecode02/button_ele_inspect_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>获取目标元素</p>
+<p><img src="/img/10-simplecode02/button_ele_inspect_2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这些 <code>css-bxxxxx-container</code> 想必就是那三个 dropdown menu</p>
+<p>咱要做的就是获取这些元素的父类然后添加多一个子元素就行了</p>
+<p>参考 ChatGPT，添加一个测试按钮</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// button 创建</span><br><span class="hljs-keyword">const</span> btn_calendar = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;button&quot;</span>);<br>btn_calendar.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export Annual Calendar as .ics&quot;</span>;<br><br>btn_calendar.<span class="hljs-property">onclick</span> = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Clicked!&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">// 插入 button 元素</span><br><span class="hljs-keyword">const</span> targetEle = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;.css-b62m3t-container&quot;</span>);<br>targetEle.<span class="hljs-property">parentElement</span>.<span class="hljs-title function_">appendChild</span>(btn_calendar);<br></code></pre></td></tr></table></figure>
+<p><img src="/img/10-simplecode02/button_test.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>看起来不错</p>
+<p>完善一下 <code>.onclick</code> 的功能性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 改成 async 函数</span><br>btn_timetable.<span class="hljs-property">onclick</span> = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>	<span class="hljs-comment">// 弹窗确认</span><br>	<span class="hljs-keyword">const</span> t_result = <span class="hljs-title function_">confirm</span>(<span class="hljs-string">&quot;Download the tiemtable file?&quot;</span>);<br>	btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span>;<br>	<span class="hljs-keyword">if</span> (t_result) &#123;<br>		<span class="hljs-comment">// 一些在按钮上小小的过场效果</span><br>		btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Fetching data...&quot;</span><br>		btn_timetable.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 89%)&quot;</span>;<br>		<span class="hljs-keyword">await</span> <span class="hljs-title function_">exportTimetable</span>();<br>		btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Done!&quot;</span><br>		<span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">1000</span>));<br>		btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>		btn_timetable.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 100%)&quot;</span>;<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;user cancelled&quot;</span>)<br>		btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>	&#125;<br>	btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export timetable as .ics&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用默认的按钮样式有点奇怪，保持界面和谐，那就抄一下那些 dropdown 的样式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> styles = &#123;<br>    <span class="hljs-attr">minHeight</span>: <span class="hljs-string">&quot;40px&quot;</span>,<br>    <span class="hljs-attr">outline</span>: <span class="hljs-string">&quot;09!important&quot;</span>,<br>    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;hsl(0, 0%, 100%)&quot;</span>,<br>    <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&quot;hsl(0, 0%, 80%)&quot;</span>,<br>    <span class="hljs-attr">borderRadius</span>: <span class="hljs-string">&quot;5px&quot;</span>,<br>    <span class="hljs-attr">borderStyle</span>: <span class="hljs-string">&quot;solid&quot;</span>,<br>    <span class="hljs-attr">borderWidth</span>: <span class="hljs-string">&quot;1px&quot;</span>,<br>    <span class="hljs-attr">boxSizing</span>: <span class="hljs-string">&quot;border-box&quot;</span>,<br>    <span class="hljs-attr">textAlign</span>: <span class="hljs-string">&quot;left&quot;</span>,<br>    <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;hsl(0, 0%, 50%)&quot;</span>,<br>    <span class="hljs-attr">cursor</span>: <span class="hljs-string">&quot;pointer&quot;</span><br>&#125;<br><br><span class="hljs-comment">// assign 按钮样式</span><br><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(btn_calendar.<span class="hljs-property">style</span>, styles);<br></code></pre></td></tr></table></figure>
+<p><img src="/img/10-simplecode02/button_style.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>十分和谐 \(￣︶￣*\))</p>
+<p>另外，我发现原本的那些 dropdown menu 是有鼠标悬浮效果的（也就是一点点的变色动画罢了</p>
+<p>为了全局统一性。。。咱也加罢</p>
+<p>依然是求教 ChatGPT</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">btn_timetable.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseenter&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">disabled</span>)&#123;<br>		<span class="hljs-comment">// 边框颜色并没有完全抄原本的，而是提取页面上的颜色</span><br>		<span class="hljs-comment">// 我认为既可以保持界面和谐也带有一定的区分度</span><br>		<span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;#1a6387&quot;</span>;<br>	&#125;<br>&#125;);<br><br>btn_timetable.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseleave&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>	<span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 80%)&quot;</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>最后课程表按钮也照葫芦画瓢</p>
+<p>按钮元素插入代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 按钮样式</span><br><span class="hljs-keyword">const</span> styles = &#123;<br>    <span class="hljs-attr">minHeight</span>: <span class="hljs-string">&quot;40px&quot;</span>,<br>    <span class="hljs-attr">outline</span>: <span class="hljs-string">&quot;09!important&quot;</span>,<br>    <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&quot;hsl(0, 0%, 100%)&quot;</span>,<br>    <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&quot;hsl(0, 0%, 80%)&quot;</span>,<br>    <span class="hljs-attr">borderRadius</span>: <span class="hljs-string">&quot;5px&quot;</span>,<br>    <span class="hljs-attr">borderStyle</span>: <span class="hljs-string">&quot;solid&quot;</span>,<br>    <span class="hljs-attr">borderWidth</span>: <span class="hljs-string">&quot;1px&quot;</span>,<br>    <span class="hljs-attr">boxSizing</span>: <span class="hljs-string">&quot;border-box&quot;</span>,<br>    <span class="hljs-attr">textAlign</span>: <span class="hljs-string">&quot;left&quot;</span>,<br>    <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;hsl(0, 0%, 50%)&quot;</span>,<br>    <span class="hljs-attr">cursor</span>: <span class="hljs-string">&quot;pointer&quot;</span><br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">timetableBtnInsertion</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 日程表按钮创建</span><br>    <span class="hljs-keyword">const</span> btn_calendar = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;button&quot;</span>);<br>    btn_calendar.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export Annual Calendar as .ics&quot;</span>;<br><br>    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(btn_calendar.<span class="hljs-property">style</span>, styles);<br><br>    btn_calendar.<span class="hljs-property">onclick</span> = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>        <span class="hljs-keyword">const</span> cal_result = <span class="hljs-title function_">confirm</span>(<span class="hljs-string">&quot;Downlaod the Annual calendar file?&quot;</span>);<br>        btn_calendar.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (cal_result) &#123;<br>            btn_calendar.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Fetching data...&quot;</span>;<br>            btn_calendar.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 89%)&quot;</span>;<br>            <span class="hljs-comment">// await new Promise((resolve, reject) =&gt; setTimeout(resolve, 3000));</span><br>            <span class="hljs-keyword">await</span> <span class="hljs-title function_">exportCalendar</span>();<br>            btn_calendar.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Done!&quot;</span>;<br>            <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">1000</span>));<br>            btn_calendar.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>            btn_calendar.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 100%)&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;user cancelled&quot;</span>)<br>            btn_calendar.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>        &#125;<br>        btn_calendar.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export Annual Calendar as .ics&quot;</span>;<br><br>    &#125;<br><br>    btn_calendar.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseenter&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">disabled</span>)&#123;<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;#1a6387&quot;</span>;<br>        &#125;<br>    &#125;);<br><br>    btn_calendar.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseleave&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 80%)&quot;</span>;<br>    &#125;);<br><br><br>	<span class="hljs-comment">// 课程表按钮创建</span><br>    <span class="hljs-keyword">const</span> btn_timetable = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;button&quot;</span>);<br>    btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export timetable as .ics&quot;</span>;<br>    <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(btn_timetable.<span class="hljs-property">style</span>, styles);<br><br>    btn_timetable.<span class="hljs-property">onclick</span> = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>        <span class="hljs-keyword">const</span> t_result = <span class="hljs-title function_">confirm</span>(<span class="hljs-string">&quot;Download the tiemtable file?&quot;</span>);<br>        btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">if</span> (t_result) &#123;<br>            btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Fetching data...&quot;</span><br>            btn_timetable.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 89%)&quot;</span>;<br>            <span class="hljs-keyword">await</span> <span class="hljs-title function_">exportTimetable</span>();<br>            btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Done!&quot;</span><br>            <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">1000</span>));<br>            btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>            btn_timetable.<span class="hljs-property">style</span>.<span class="hljs-property">backgroundColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 100%)&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;user cancelled&quot;</span>)<br>            btn_timetable.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;<br>        &#125;<br>        btn_timetable.<span class="hljs-property">textContent</span> = <span class="hljs-string">&quot;Export timetable as .ics&quot;</span>;<br>    &#125;<br><br>    btn_timetable.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseenter&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">disabled</span>)&#123;<br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;#1a6387&quot;</span>;<br>        &#125;<br>    &#125;);<br><br>    btn_timetable.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;mouseleave&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">style</span>.<span class="hljs-property">borderColor</span> = <span class="hljs-string">&quot;hsl(0, 0%, 80%)&quot;</span>;<br>    &#125;);<br><br>    <span class="hljs-comment">// 元素插入</span><br>    <span class="hljs-keyword">const</span> targetEle = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;.css-b62m3t-container&quot;</span>);<br>    targetEle.<span class="hljs-property">parentElement</span>.<span class="hljs-title function_">appendChild</span>(btn_calendar);<br>    targetEle.<span class="hljs-property">parentElement</span>.<span class="hljs-title function_">appendChild</span>(btn_timetable);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行一下，最终效果不错</p>
+<p><img src="/img/10-simplecode02/button_final.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>按钮的功能也正常</p>
+<p>基本上都完成了，测试下来也没啥 bug</p>
+<p>可以写到 userscript 里了</p>
+<h2 id="Userscript-及前端">Userscript 及前端</h2>
+<p>直接开抄，把所有代码复制到 Tampermonkey 的编辑器里</p>
+<p>最后在主函数里加上执行函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-string">&#x27;use strict&#x27;</span>;<br>    <span class="hljs-comment">// Your code here...</span><br>    <span class="hljs-title function_">timetableBtnInsertion</span>();<br>&#125;)();<br></code></pre></td></tr></table></figure>
+<p>在文件头加上 <code>@match</code> URI，否则脚本不会自动检测运行</p>
+<p>保存，timetable 启动</p>
+<p>。。。</p>
+<p>诶，怎么什么都没有</p>
+<p><img src="/img/10-simplecode02/timetable_top.png" srcset="/img/loading.gif" lazyload alt="空空如也"></p>
+<p>我的按钮元素呢？</p>
+<p>来看看控制台日志</p>
+<p><img src="/img/10-simplecode02/console_log_error.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><code>#418</code> 和 <code>#423</code></p>
+<p>咱来看看都有些啥</p>
+<p>#418:</p>
+<div class="note note-warning">
+            <p><strong>Hydration failed because the initial UI does not match what was rendered on the server.</strong></p>
+          </div>
+<p>#423:</p>
+<div class="note note-warning">
+            <p><strong>There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering.</strong></p>
+          </div>
+<p>Hydration？</p>
+<p>Rendered on the server?</p>
+<p>Client rendering?</p>
+<p>这些都啥跟啥啊，我一个 web dev 萌新看得一愣一愣的</p>
+<p>果然，跳出舒适圈准没好事。。。</p>
+<p>再次求教万能的 ChatGPT</p>
+<blockquote>
+<p>The error message you’re seeing, “React js Hydration failed because the initial UI does not match what was rendered on the server,” typically occurs when there’s a mismatch between the HTML rendered on the server and the HTML generated by React on the client.</p>
+</blockquote>
+<blockquote>
+<p>React uses a process called hydration to attach event handlers and other necessary data to the HTML generated on the server. During hydration, React compares the server-rendered HTML with the client-rendered HTML to ensure they match. If there’s a mismatch, React throws this error.</p>
+</blockquote>
+<p>我的理解是，React 有个叫做 Hydration 的 process，他会比较服务端渲染的 html 以及客户端渲染的 html 来确认是否相符，这样可以确保 UI 的一致性</p>
+<p>然而，当网页加载时 Tampermonkey 的插件也同时执行了，他往 html 文件中插入了元素</p>
+<p>因为客户端的 html 和服务端的不一致，这就导致了 Hydration fail，于是报 <code>#418</code></p>
+<p>而 <code>#423</code>呢，就是因为 Hydration fail，所以 fallback 到了纯客户端渲染</p>
+<p>咱来参考一下<a target="_blank" rel="noopener" href="https://juejin.cn/post/7224378915484467259">稀土掘金上的这篇文章</a></p>
+<blockquote>
+<p>这个错误通常是在使用服务端渲染（SSR）时出现的，它的原因是 React 在服务端渲染完成后生成的 HTML 和客户端渲染时生成的 HTML 不一致导致的。</p>
+</blockquote>
+<blockquote>
+<p>在 React 服务端渲染中，React 会将组件渲染成 HTML 字符串，然后发送到客户端。在客户端，React 会重新创建组件并将其挂载到 DOM 上。如果服务端渲染时生成的 HTML 和客户端渲染时生成的 HTML 不一致，就会出现“hydration failed”（水合失败）的错误。</p>
+</blockquote>
+<p>看来我的理解在某种程度上是对的 (～￣▽￣)～</p>
+<p>说道 SSR 和 CSR（服务端渲染和客户端渲染），我似乎在一个博客上看到过相关的文章</p>
+<p>当时没咋留意，是时候恶补一下 web dev 了</p>
+<p><a target="_blank" rel="noopener" href="https://blog.huli.tw/2023/11/27/server-side-rendering-ssr-and-isomorphic/">https://blog.huli.tw/2023/11/27/server-side-rendering-ssr-and-isomorphic/</a></p>
+<p><a target="_blank" rel="noopener" href="https://life.huli.tw/2018/05/04/introduction-mvc-spa-and-ssr-545c941669e9/">https://life.huli.tw/2018/05/04/introduction-mvc-spa-and-ssr-545c941669e9/</a></p>
+<p>Huli 大佬的俩篇文章很清楚的解释了有关网页渲染的问题</p>
+<p>对问题有一个基础认知之后，那又该怎么解决呢</p>
+<p>再再次请教 ChatGPT，以及参考了一下 tampermonkey 上的其他 userscript</p>
+<p>解决方法也是很简单</p>
+<p>由于 hydration check 只会在网页刚开始加载的时候执行，那加个 delay 就解决了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-string">&#x27;use strict&#x27;</span>;<br>    <span class="hljs-comment">// Your code here...</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>	    <span class="hljs-title function_">timetableBtnInsertion</span>();<br>    &#125;, <span class="hljs-number">500</span>);<br>&#125;)();<br></code></pre></td></tr></table></figure>
+<p>保存到 tampermonkey 再试几遍，基本上都没问题了</p>
+<h2 id="登录页面检测">登录页面检测</h2>
+<p>last but not least，还有最后最后一个小问题</p>
+<p>如果用户是未登录情况下加载网页，会先有一个登录界面</p>
+<p>蓝鹅这个脚本会在网页被加载时就执行</p>
+<p>因为网页没有被重新加载，脚本不会在登录后自动运行来插入元素</p>
+<p>咱要最后做多一步登录检测</p>
+<p>怎么检测已经是在时间表页面了呢？很简单，留意界面右上角有个 log off 按钮</p>
+<p><img src="/img/10-simplecode02/timetable_top.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>让脚本等到这个按钮元素出现的时候再执行就好了</p>
+<p>让咱再再再次借助 ChatGPT 的力量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">waitForLogin</span>(<span class="hljs-params">callback</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;observing...&quot;</span>);<br>    <span class="hljs-keyword">const</span> cName = <span class="hljs-string">&quot;.LogOffButton_button__1Cye6&quot;</span>;<br>    <span class="hljs-keyword">const</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(cName);<br>    <span class="hljs-keyword">if</span> (element) &#123;<br>        <span class="hljs-title function_">callback</span>();<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>	<span class="hljs-comment">// 创建一个MutationObserver</span><br>	<span class="hljs-comment">// 这是一个用来监听 DOM 更改的，有任何变动都会执行 callback 函数</span><br>    <span class="hljs-keyword">const</span> observer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MutationObserver</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">mutationsList, observer</span>) &#123;<br>        <span class="hljs-keyword">const</span> element = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(cName);<br>        <span class="hljs-keyword">if</span> (element) &#123;<br>            observer.<span class="hljs-title function_">disconnect</span>();<br>            <span class="hljs-title function_">callback</span>();<br>        &#125;<br>    &#125;);<br>    observer.<span class="hljs-title function_">observe</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">documentElement</span>, &#123; <span class="hljs-attr">childList</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">subtree</span>: <span class="hljs-literal">true</span> &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-string">&#x27;use strict&#x27;</span>;<br>    <span class="hljs-comment">// Your code here...</span><br>	<span class="hljs-title function_">waitForLogin</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;logged in&#x27;</span>);<br>		<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>			<span class="hljs-title function_">timetableBtnInsertion</span>();<br>		&#125;, <span class="hljs-number">500</span>);<br>	&#125;);<br>&#125;)();<br></code></pre></td></tr></table></figure>
+<p>咱把前面的代码都扔到 <code>callback</code> 里了，如果是 login 界面的话就等他加载到时间表页面</p>
+<p>反之，如果已经登录完成了，那就直接执行 <code>callback</code></p>
+<p>至此，应该完成所有需求了</p>
+<p>呼~ (*￣3￣)╭</p>
+<blockquote>
+<p>如果有翻过我 github 的话，会发现实际的脚本和这篇文章写的有不同</p>
+<p>似乎多了些东西</p>
+<p>那部分是属于考试时间表的，基本功能和逻辑一样，如果再把那部分加进来的话我觉得有些多于</p>
+<p>就当个彩蛋吧 😉</p>
+</blockquote>
+<h1>小结</h1>
+<p>说实话，这是我人生中第一次接触 javascript，</p>
+<p>可能是它性质本身就和 python 类似，所以比较容易上手</p>
+<p>写起来也有种熟悉的感觉</p>
+<p>还是那句话，人应该要跳出自己的舒适圈，不断的去尝试新的东西，况且在互联网时代学习的成本已经低了许多，现在还有 ChatGPT 加持，从零着手一个未知的领域未必是一个很大的难题</p>
+<p>说到 ChatGPT，咱也来唠俩句</p>
+<p>我见过有评论说 ChatGPT 只是废话制造器，没有实际用途；也有另一个极端认为 ChatGPT 已经非常聪明了，可以取代目前绝大部分工作</p>
+<p>俩边都过于极端，我以前没怎么去用 ChatGPT，认为出来的结果过于千篇一律，写出来的东西看似很高级，但实际上缺乏灵魂，一看就知道是 AI 写的</p>
+<p>用也只是在一些文件上用，没感觉到<s>巨硬</s>某些人所宣传的提高生产力</p>
+<p>但是在这次写小脚本的时候，我才真正感受到了 ChatGPT 如何显著提升所谓的「生产力」</p>
+<p>先来讲讲搜索，它的搜索能力是爆杀搜索引擎的，虽然有时候会出幻觉开始编造东西</p>
+<p>以前，比如搜一个问题的时候不知道关键字是啥，一直搜不到想要的结果，以为这个问题前所未有而卡死在这里</p>
+<p>但实际上这个问题早就被解决了，只是用了些不同的词汇，你和搜索答案就差一个单词的距离</p>
+<p>后者的情况非常常见，再怎么熟悉如何利用搜索引擎的人都会有这个问题</p>
+<p>这很大程度上减少了你的 debug 以及学习知识的效率，因为时间都卡在想应该怎么搜的问题上</p>
+<p>ChatGPT 的出现很大程度上解决了这个问题，因为它在某些程度上能「理解」你在问什么，有「认知」偏差也能通过修改 prompt 解决</p>
+<p>而且能够很快的给出你想要的答案</p>
+<p>即使答案有时候会因为幻觉开始乱来，但是这很快就能通过再次利用搜索引擎找到真正正确的答案</p>
+<p>因为它的答案都会有能被搜索到的关键字</p>
+<p>再举一个例子，文档理解</p>
+<p>阅读文档是 debug 以外最占用时间的，要充分理解一个库该怎么使用是非常费事费力的事情，通常要花上俩三天才能理解，而实际上你的代码只是用到其中一个小功能，你所吸收到多余的知识也只能当个未来投资</p>
+<p>阅读一段代码时，常常会引用到不同的库，没可能把引用到的库的文档全都读一边吧</p>
+<p>上网搜，也只能搜个大概，想用的话还没能完全理解这个功能</p>
+<p>而你去问 ChatGPT，它不但会给你解释这个功能是做什么，还会有相应的示例</p>
+<p>一个文档写得差一点的库都未必会有示例，还得靠自己去搜其他人的教程</p>
+<p>ChatGPT 很好的解决了以上的问题，它帮你阅读并消化某个文档，同时也消化了网上其他人提供的的资源</p>
+<p>出来的结果非常容易理解，一看就懂，还有其他问题就再提问并优化它提供的示例</p>
+<p>马上就能知道该如何应用在自己的代码里</p>
+<p>把写程序里最耗时的俩部分解决掉，生产力不就提升了吗？</p>
+<p>这个脚本就是一个最好的证明，我从一个完全不懂 javascript 的萌新到写一个脚本出来用不了很久</p>
+<p>中间还顺便学了不少有关 web 的概念</p>
+<p>有模糊的概念都是先问 ChatGPT，再根据结果上搜索引擎查，效率比以前高不少</p>
+<p>只能说，有好有坏吧</p>
+<p>虽然效率提高了，但是学习的机会也少了</p>
+<p>苦苦钻研文档，是会花不少时间，但是其中会学到不少知识</p>
+<p>而直接问 ChatGPT，省下了钻研文档的时间，但是也限制了你所吸收知识的程度</p>
+<p>看文档或许能知道一些库在某些情况下的特殊用途，可能会更高效率以及聪明地解决你目前遇到的难题，而直接问 ChatGPT 只会局限在现有的解决思路上</p>
+<p>任何事物都是一把双刃剑，和互联网一样，看似能随时获取任何资讯，但也造就了信息茧房，认知被过滤过的知识所蒙蔽</p>
+<p>你看似能知道更多的东西，但是目光也就更短浅了</p>
+<p>说的好像有点多了，也有些跑题</p>
+<p>那就这样吧，下篇博文再见</p>
+<p>ヾ(￣▽￣)Bye<sub>Bye</sub></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E9%9A%8F%E6%89%8B%E6%90%93/" class="print-no-link">#随手搓</a>
+      
+        <a href="/tags/Javascript/" class="print-no-link">#Javascript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>随手搓 02：学校时间表爬取</div>
+      <div>https://blissfulalloy79.github.io/10-simplecode02/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BlissfulAlloy79</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/07-simplecode01/" title="随手搓 01：MC 物品数据统计">
+                        <span class="hidden-mobile">随手搓 01：MC 物品数据统计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-6bmghd4bb-blissfulalloy79.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="/js/blacklines.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
