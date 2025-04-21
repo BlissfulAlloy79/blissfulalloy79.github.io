@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="BlissfulAlloy79">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="序 在各种机缘巧合之下有幸在高中玩了俩年 RoboMaster，但其实在队伍中我一直都是负责工程机的改装及调试，基本上没怎么碰过步兵以及视觉相关的内容 趁着这次搞完了中学生涯中最后一场赛事，就来玩玩视觉组的任务(￣▽￣)* 既然是随便玩玩，那当然要挑一个最基础的来，也就是合 24 了 不过虽然说是最基础的，实际上在小组赛中不知道什么原因也没几个队伍能够合出来，甚至在决赛里也有没合出来的 我寻思这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RMYC-合24的一个初步尝试">
+<meta property="og:url" content="https://blissfulalloy79.github.io/13-robomasteryc01/index.html">
+<meta property="og:site_name" content="BlissfulAlloy&#39;s Blog">
+<meta property="og:description" content="序 在各种机缘巧合之下有幸在高中玩了俩年 RoboMaster，但其实在队伍中我一直都是负责工程机的改装及调试，基本上没怎么碰过步兵以及视觉相关的内容 趁着这次搞完了中学生涯中最后一场赛事，就来玩玩视觉组的任务(￣▽￣)* 既然是随便玩玩，那当然要挑一个最基础的来，也就是合 24 了 不过虽然说是最基础的，实际上在小组赛中不知道什么原因也没几个队伍能够合出来，甚至在决赛里也有没合出来的 我寻思这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blissfulalloy79.github.io/img/13-robomasteryc01/power_rune_sample.png">
+<meta property="og:image" content="https://blissfulalloy79.github.io/img/13-robomasteryc01/vision_info_explained.png">
+<meta property="article:published_time" content="2024-08-25T02:25:37.956Z">
+<meta property="article:modified_time" content="2024-12-29T09:53:37.719Z">
+<meta property="article:author" content="BlissfulAlloy79">
+<meta property="article:tag" content="RoboMaster">
+<meta property="article:tag" content="机器人">
+<meta property="article:tag" content="比赛">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blissfulalloy79.github.io/img/13-robomasteryc01/power_rune_sample.png">
+  
+  
+  
+  <title>RMYC-合24的一个初步尝试 - BlissfulAlloy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blissfulalloy79.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BlissfulAlloy79&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-bilibili-fill"></i>
+                <span>ACGN</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/bangumis/" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>冻鳗与书籍</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/steamgames/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>Steam</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RMYC-合24的一个初步尝试"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        BlissfulAlloy79
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-24 22:25" pubdate>
+          2024年8月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RMYC-合24的一个初步尝试</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年12月29日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h1>序</h1>
+<p>在各种机缘巧合之下有幸在高中玩了俩年 RoboMaster，但其实在队伍中我一直都是负责工程机的改装及调试，基本上没怎么碰过步兵以及视觉相关的内容</p>
+<p>趁着这次搞完了中学生涯中最后一场赛事，就来玩玩视觉组的任务<sub>(￣▽￣)</sub>*</p>
+<p>既然是随便玩玩，那当然要挑一个最基础的来，也就是合 24 了</p>
+<p>不过虽然说是最基础的，实际上在小组赛中不知道什么原因也没几个队伍能够合出来，甚至在决赛里也有没合出来的</p>
+<p>我寻思这应该不难啊，不过实际上会遇到什么困难也得实践一下才知道</p>
+<p><s>再提一嘴，决赛中我看到有些队伍甚至能够做到秒合成，那我就把这个当作一个小目标吧（逃</s></p>
+<h1>背景信息</h1>
+<p>这里所提到的合 24，官方名称其实叫做能量机关</p>
+<p>成功击打能量机关将会为团队带来一些 buff，例如伤害加成</p>
+<p>不同赛区以及组别的能量机关任务不同，在中学组的比赛里，任务就是合 24</p>
+<p>那什么是合 24 呢？</p>
+<p>在能量机关上面有五块电子显示牌，上面能够显示 RoboMaster 可识别的的视觉标签</p>
+<p>在合 24 这个任务中，从左到右第一块牌子将会是一个随机的加减乘除运算符，剩下四块是四个数字</p>
+<p><img src="/img/13-robomasteryc01/power_rune_sample.png" srcset="/img/loading.gif" lazyload alt="例如这样"></p>
+<p>在图中这个例子，运算符号是减号，数字分别为 8， 6， 6， 2</p>
+<p>在这个情况下，机器人将需要按顺序击打 ‘8’, ‘6’, ’-‘, ’6‘, ‘2’</p>
+<p>而这个算式的答案也就是 24</p>
+<blockquote>
+<p>值得留意的是，尽管在这个例子中没表示出来，运算符号可以多次重用，但数字只能用一次</p>
+<p>也就是说有机会出现 ‘3’, ‘x’, ‘4’, ‘x’, ‘2’ 这种把乘号用俩次的情况</p>
+</blockquote>
+<p>五块显示牌每五秒钟刷新一次，而每次击打完一块牌后必须在一秒内击打下一块，否则会识别为超时无效</p>
+<h1>问题解剖</h1>
+<p>观察一下，我们其实可以把这个击打能量机关的任务拆解为 3 个小任务，这样能够更加清晰明了的提供代码思路以及解决方案</p>
+<p>这三个任务顺序分别为</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>识别（视觉，数据结构）</p>
+</li>
+<li class="lvl-2">
+<p>计算（合 24 算式）</p>
+</li>
+<li class="lvl-2">
+<p>射击（包含一部分射击相关的计算）</p>
+</li>
+</ul>
+<h2 id="识别">识别</h2>
+<p>要完成整个任务，无论是击打还是计算，都离不开识别这一步</p>
+<p>Robomaster 内置了视觉标签的视觉模型，所以可以调用内置的库来提取图传中所识别到的标签</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">start</span>():<br>	<span class="hljs-comment"># 启用视觉标签识别</span><br>	vision_ctrl.enable_detection(rm_define.vision_detection_marker)<br><br>	<span class="hljs-comment"># 将识别颜色设置为蓝色</span><br>	vision_ctrl.marker_detection_color_set(rm_define.marker_detection_color_blue)<br>	<br>	<span class="hljs-comment"># 初始化空列表</span><br>	raw_vision_info: <span class="hljs-built_in">list</span> = []<br>	<br>	<span class="hljs-comment"># 将列表设置为识别到的标签信息</span><br>	raw_vision_info = RmList(vision_ctrl.get_marker_detection_info())<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>最后这行代码中按照官方写法用 <code>RmList()</code> 把 <code>get_marker_detection_info()</code> 的返回值进行了一次封装</p>
+<p>经过我的测试，这个函数的原本返回类型就是 list，这个 <code>RmList()</code> 的封装也只是把列表的起始项目从 0 变成 1 而已</p>
+<p>虽然不知道有什么用，况且源码也没有公开，那就暂且就先按照官方的来写，避免之后遇到奇奇怪怪的错误</p>
+<p>&lt;(＿　＿)&gt;</p>
+</blockquote>
+<p>再添加一行调试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(raw_vision_info)<br></code></pre></td></tr></table></figure>
+<p>运行，可见当图传相机的视角里若有视觉标签的话，<code>raw_vision_info</code> 的列表里会出现一些信息</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-string">[1, 17, 0.64, 0.88, 0.7, 0.6]</span><br></code></pre></td></tr></table></figure>
+<p>参考<a target="_blank" rel="noopener" href="https://dl.djicdn.com/downloads/ROBOMASTER_EP/RoboMaster_EP_Programming_Manual_CHS.pdf">官方的 EP 编程模块手册</a></p>
+<p><img src="/img/13-robomasteryc01/vision_info_explained.png" srcset="/img/loading.gif" lazyload alt="视觉标签信息解释"></p>
+<p>可见，在返回的列表中第一个元素是表示总共识别到了多少个视觉标签，之后每 5 个元素为一组</p>
+<p>组内第一个元素是标签 id，之后分别为在屏幕上的 x, y 坐标值，宽和高</p>
+<blockquote>
+<p>注意，这个坐标值十分奇葩，他并不代表屏幕的像素点，而是以类似比例的形式决定的</p>
+<p>屏幕左上角为 (0, 0)，右下角为 (1, 1)，那么屏幕中心也就是 (0.5, 0.5) 了</p>
+<p>这个细节在计算过程中非常要命，因为设置常数的话 x, y 轴要分别处理</p>
+</blockquote>
+<p>回到正题，运行代码的时候应该会发现，这个识别代码只会跑一次</p>
+<p>也就是说这个识别只会在运行的那一刻处理图传捕捉到的那一帧</p>
+<p>这个逻辑看似没问题，但只要稍微运行多几遍，就能发现这个识别并不稳定</p>
+<p>有时候能识别到 5 个，有时候啥都没识别到，又有时候只能识别 3 - 4 个标签</p>
+<p>机器人没动过，每次跑程序的结果都不一样，这太不稳定了吧 (#｀-_ゝ-)</p>
+<p>这种基于计算机视觉的识别在识别方面非常稳定，每次都能识别到标签，问题就在于我们想要的是一次性识别 5 个，这种对数量的要求就表现一般</p>
+<p>那咋办？没关系，直接写个循环让他一直识别直到数量达到要求不就得了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">start</span>():<br>	<span class="hljs-comment"># 启用视觉标签识别</span><br>	vision_ctrl.enable_detection(rm_define.vision_detection_marker)<br><br>	<span class="hljs-comment"># 将识别颜色设置为蓝色</span><br>	vision_ctrl.marker_detection_color_set(rm_define.marker_detection_color_blue)<br>	<br>	<span class="hljs-comment"># 初始化空列表</span><br>	raw_vision_info: <span class="hljs-built_in">list</span> = []<br><br>	<span class="hljs-comment"># 将列表设置为识别到的标签信息</span><br>	raw_vision_info = RmList(vision_ctrl.get_marker_detection_info())<br><br>	<span class="hljs-comment"># 循环直到识别到起码有 5 个标签</span><br>	<span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> raw_vision_info[<span class="hljs-number">1</span>] &gt;= <span class="hljs-number">5</span>:<br>		raw_vision_info = RmList(vision_ctrl.get_marker_detection_info())<br><br></code></pre></td></tr></table></figure>
+<p>这段代码中，在循环之前必须将 <code>raw_vision_info</code> 赋值，否则在判断循环条件时会报错</p>
+<h3 id="数据结构">数据结构</h3>
+<p>识别完成，咱应该想想如何将这些原始数据处理成更快、更容易读取的数据结构</p>
+<p>这里以我随便设计的一个数据结构做例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python">vision_info = &#123;<br>	marker1:<br>		[&#123;<br>			<span class="hljs-string">&#x27;x&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;y&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;w&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;h&#x27;</span>: <span class="hljs-built_in">float</span><br>		&#125;],<br>	marker2:<br>		[&#123;<br>			<span class="hljs-string">&#x27;x&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;y&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;w&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;h&#x27;</span>: <span class="hljs-built_in">float</span><br>		&#125;,<br>		&#123;<br>			<span class="hljs-string">&#x27;x&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;y&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;w&#x27;</span>: <span class="hljs-built_in">float</span>,<br>			<span class="hljs-string">&#x27;h&#x27;</span>: <span class="hljs-built_in">float</span><br>		&#125;],<br>	...<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这个是一个典型的 python 字典序，其中数据由每个键(key) 值(value) 对组成</p>
+<p>其中我用了视觉标签的 id 作为键，然后将相对应的信息作为值</p>
+<blockquote>
+<p>注意， 字典序的键和数据库类似，必须是唯一，考虑到视觉标签有机会重复，这里的值使用了列表</p>
+<p>参考 <code>marker2</code>，若有多个视觉标签那直接在列表中增加元素即可</p>
+</blockquote>
+<p>视觉标签的信息也可以变成一个字典序，其中 <code>x, y, w, h</code> 作为键，分别代表坐标以及宽高</p>
+<h3 id="数据处理">数据处理</h3>
+<p>构建完数据结构，我们可以写用于格式化的函数了</p>
+<p>首先就是将视觉标签 id 转换为字符串，这个在以后也非常有帮助</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">Id2Marker</span>(<span class="hljs-params">marker_id</span>):<br>    <span class="hljs-string">&quot;&quot;&quot; Marker Translation &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-number">10</span> &lt;= marker_id &lt;= <span class="hljs-number">19</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span>(marker_id - <span class="hljs-number">10</span>)<br>    <span class="hljs-keyword">elif</span> <span class="hljs-number">20</span> &lt;= marker_id &lt;= <span class="hljs-number">45</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">chr</span>(marker_id + <span class="hljs-number">65</span> - <span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">46</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;!&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">47</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;?&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">48</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;#&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">50</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;+&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">51</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;-&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">52</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;/&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;red&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;yellow&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;green&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">4</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;left&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;right&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">6</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;forward&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">7</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;backward&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">8</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;heart&quot;</span><br>    <span class="hljs-keyword">elif</span> marker_id == <span class="hljs-number">9</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;sword&quot;</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment">#logger.warning(&quot;Vision: unsupported marker_id:&#123;0&#125;&quot;.format(marker_id))</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>直接参考官方文档对视觉标签 id 的释义写即可，十分无脑</p>
+<p>然后我们可以开始写主要格式函数了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">getFormattedVisionInfo</span>(<span class="hljs-params">raw_vision_info: <span class="hljs-built_in">list</span> = []</span>) -&gt; <span class="hljs-built_in">dict</span>:<br>	<span class="hljs-comment"># Null case 返回</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> raw_vision_info:<br>        <span class="hljs-keyword">return</span> raw_vision_info<br><br>	<span class="hljs-comment"># 新建空字典序</span><br>    formatted_vision_info: <span class="hljs-built_in">dict</span> = &#123;&#125;<br>    <br>	<span class="hljs-comment"># 遍历所有视觉信息，注意原始数据的第一项就表示了视觉标签的总数</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, raw_vision_info[<span class="hljs-number">1</span>]):<br>	    <span class="hljs-comment"># 使用转换函数将 id 变为字符串</span><br>        marker = Id2Marker(raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">2</span>])<br>        <span class="hljs-comment"># 基本的列表数学（</span><br>        info: <span class="hljs-built_in">dict</span> = &#123;<br>            <span class="hljs-string">&#x27;x&#x27;</span>: raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">3</span>],<br>            <span class="hljs-string">&#x27;y&#x27;</span>: raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">4</span>],<br>            <span class="hljs-string">&#x27;w&#x27;</span>: raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">5</span>],<br>            <span class="hljs-string">&#x27;h&#x27;</span>: raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">6</span>]<br>        &#125;<br>	    <span class="hljs-keyword">if</span> marker <span class="hljs-keyword">in</span> formatted_vision_info:<br>            formatted_vision_info[marker].append(info)<br>        <span class="hljs-keyword">else</span>:<br>            formatted_vision_info[marker] = [info]<br><br>    <span class="hljs-keyword">return</span> formatted_vision_info<br></code></pre></td></tr></table></figure>
+<h2 id="计算">计算</h2>
+<h3 id="获取算式">获取算式</h3>
+<p>在计算之前，我们应该把机器人看到的算式还原回来，这里可能漏了讲，<code>vision_ctrl.get_marker_detection_info()</code> 函数所获取的数据是按照特定方式排序的，并非直接从左到右排</p>
+<p>那也就是说我们必须得将获取到的数据进行整理，还原算式</p>
+<p>为了方便后面的计算，这里的还原函数就以列表的形式返回算式</p>
+<p>例如 <code>['+', '2', '1', '4', '8']</code> 这样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">getMarkers</span>(<span class="hljs-params">raw_vision_info: <span class="hljs-built_in">list</span> = [], vision_info: <span class="hljs-built_in">dict</span> = &#123;&#125;</span>) -&gt; <span class="hljs-built_in">list</span>:<br>	<span class="hljs-comment"># Null case 返回</span><br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> raw_vision_info <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> vision_info:<br>		<span class="hljs-keyword">return</span> []<br><br>	<span class="hljs-comment"># 利用用列表生成式从 raw_vision_info 获取识别到的标签数据</span><br>	markers = [Id2Marker(raw_vision_info[i * <span class="hljs-number">5</span> + <span class="hljs-number">2</span>]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, raw_vision_info[<span class="hljs-number">1</span>])]<br>	<span class="hljs-comment"># 列表的 sort 方法 + key 参数配合 lambda 函数</span><br>	markers.sort(key=<span class="hljs-keyword">lambda</span> t: vision_info[t].copy().pop()[<span class="hljs-string">&#x27;x&#x27;</span>])<br>	<span class="hljs-keyword">return</span> markers<br></code></pre></td></tr></table></figure>
+<p><s>这里的 <code>markers.sort()</code> 利用了 <code>sort</code> 函数内置的 key 参数</s></p>
+<p><s>当 python 遍历列表中的元素并作比较时，可以使用 key 这个参数修改比较的值（顾名思义</s></p>
+<p><s>若不传入 key ，Python 则会直接比较元素本身</s></p>
+<p><s>若传入 key 参数，并且是个函数的话，sort 函数会把元素传入到 key 函数的参数，并且比较 key 的返回值</s></p>
+<p><s>这个例子中，我传入了一个 lambda 函数（无名函数），t 作为这个函数的参数，“:” 后的参数为这个 lambda 函数的返回值</s></p>
+<blockquote>
+<p>此处 <code>sort</code> 函数所使用的无名函数处理逻辑有问题，但在目前测试使用并无大碍</p>
+<p>之后有空再改吧 (#｀-_ゝ-)</p>
+</blockquote>
+<h3 id="计算击打次序">计算击打次序</h3>
+<p>在上一步中，<code>getMarkers()</code> 函数所返回的是一个列表</p>
+<p>那我们同样应该基于这个列表创建一个击打次序的列表</p>
+<p>举个例子，假设识别到的是 <code>['+', '2', '1', '4', '8']</code></p>
+<p>那我们就需要返回一个 <code>['1', '8', '+', '4', '+', '2']</code> 的列表以表示击打顺序</p>
+<p>关于计算，我认为<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zU4y1Z7zM/">这个视频</a>已经讲的非常清楚了</p>
+<p>这个程序也是采用同样的遍历逻辑，只不过是用 python 写了一次罢了（</p>
+<p>简单来说，就是分别处理加、减、乘、除、这四种情况</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/RoboMaster/" class="print-no-link">#RoboMaster</a>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="print-no-link">#机器人</a>
+      
+        <a href="/tags/%E6%AF%94%E8%B5%9B/" class="print-no-link">#比赛</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RMYC-合24的一个初步尝试</div>
+      <div>https://blissfulalloy79.github.io/13-robomasteryc01/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BlissfulAlloy79</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/14-latex/" title="LaTeX 笔记 - 在 VSCode 编写 LaTeX 文档的一个尝试">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">LaTeX 笔记 - 在 VSCode 编写 LaTeX 文档的一个尝试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/10-simplecode02/" title="随手搓 02：学校时间表爬取">
+                        <span class="hidden-mobile">随手搓 02：学校时间表爬取</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-6bmghd4bb-blissfulalloy79.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="/js/blacklines.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
