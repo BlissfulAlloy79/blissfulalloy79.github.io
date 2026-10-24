@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="BlissfulAlloy79">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一次 debug 经验记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Low-level Debug 笔记">
+<meta property="og:url" content="https://blissfulalloy79.github.io/16-interndebug/index.html">
+<meta property="og:site_name" content="BlissfulAlloy&#39;s Blog">
+<meta property="og:description" content="一次 debug 经验记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-24T13:39:42.000Z">
+<meta property="article:modified_time" content="2026-08-12T09:39:05.233Z">
+<meta property="article:author" content="BlissfulAlloy79">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="Intern">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Asan">
+<meta property="article:tag" content="Perf">
+<meta property="article:tag" content="Embedding">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Low-level Debug 笔记 - BlissfulAlloy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blissfulalloy79.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BlissfulAlloy79&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-bilibili-fill"></i>
+                <span>ACGN</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/bangumis/" target="_self">
+                    <i class="iconfont icon-bilibili-fill"></i>
+                    <span>冻鳗与书籍</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/steamgames/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>Steam</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Low-level Debug 笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        BlissfulAlloy79
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-24 09:39" pubdate>
+          2026年7月24日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Low-level Debug 笔记</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年8月12日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>一次 debug 经验记录</p>
+<span id="more"></span>
+<h1>序</h1>
+<p>我目前在实习一个嵌入式系统的岗位，其中就需要学习如何使用很多不同的 low-level debugger，很多学校里教的知识都是点到为止，但实践中就需要对不同个工具做一个基础的挖掘</p>
+<p>个人认为这个学习的机会是十分难得的，毕竟是在校内少有的对于知识的应用，于是有了这篇笔记作为记录以及未来的参考</p>
+<p>address sanitizer (Asan) 就是其中一个最常用的。可惜在学校系统课里并没有对 Asan 做特别多的覆盖，只是让我们知道有类似的 debug 工具而已（例如 Valgrind），这篇笔记对 Asan 的一些特性做了些记录</p>
+<p>perf 是一个校内几乎没有提及的工具，毕竟这更像是一个优化工具，学校项目通常并不会教优化方面的只是，也能理解毕竟很多课的重点就不在优化上，所以这是一个非常好的机会去学习使用这类工具</p>
+<p>由于是经验记录，此篇笔记将会从一个样例来讲解相关的知识，而非直接列出各种工具的特性及使用场景</p>
+<h1>一个程序</h1>
+<p>这个样例程序非常简单，只有一个主函数（main）以及线程函数，但埋下了不少问题</p>
+<p>主函数先叫了一个 vfork 创建一个子进程，子进程只做了些简单的工作就退出了</p>
+<p>父进程会等子进程结束后再继续</p>
+<p>接下来就同时创建俩个线程，他们被安排执行同一个线程函数，这个线程函数有俩个部分：</p>
+<ol>
+<li class="lvl-3">
+<p>循环 20000 次 malloc 一个随机大小（16 - 4096 字节）的内存，再循环 10000 次相隔一个分配的内存空间 free</p>
+</li>
+<li class="lvl-3">
+<p>无限循环（while true）malloc 一个随机大小（16 - 4096 字节）的内存，并马上 free 掉</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">malloc_thread</span><span class="hljs-params">(<span class="hljs-type">void</span> *arg)</span><br>&#123;<br>    <span class="hljs-type">const</span> <span class="hljs-type">int</span> n = <span class="hljs-number">20000</span>;<br>    <span class="hljs-type">char</span> **blocks = (<span class="hljs-type">char</span>**) <span class="hljs-built_in">malloc</span>(n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>*));<br><br>    <span class="hljs-keyword">if</span> (blocks) &#123;<br>        <span class="hljs-type">int</span> nbs = n;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            blocks[i] = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>((rand() % <span class="hljs-number">256</span> + <span class="hljs-number">1</span>) * <span class="hljs-number">16</span>);<br>            <span class="hljs-keyword">if</span> (!blakcs[i]) &#123;<br>                nbs = i;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nbs; i += <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-built_in">free</span>(blocks[i]);<br>            blocks[i] = <span class="hljs-literal">NULL</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-type">size_t</span> size = rand() % <span class="hljs-number">4096</span> + <span class="hljs-number">1</span>;<br>        <span class="hljs-type">char</span> *var = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>(size);<br>        <span class="hljs-built_in">free</span>(var);<br>    &#125;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>    <span class="hljs-type">pid_t</span> child = vfork();<br>    <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> == child) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Child process\n&quot;</span>);<br>        sleep(<span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-type">int</span> status = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;wait for child pid to exit: %d\n&quot;</span>, child);<br>        wait(&amp;status);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Child exit\n&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-type">pthread_t</span> threads[<span class="hljs-number">2</span>];<br><br>    pthread_create(&amp;threads[<span class="hljs-number">0</span>], <span class="hljs-literal">NULL</span>, malloc_thread, <span class="hljs-literal">NULL</span>);<br>    pthread_create(&amp;threads[<span class="hljs-number">1</span>], <span class="hljs-literal">NULL</span>, malloc_thread, <span class="hljs-literal">NULL</span>);<br><br>    pthread_join(threads[<span class="hljs-number">0</span>], <span class="hljs-literal">NULL</span>);<br>    pthread_join(threads[<span class="hljs-number">1</span>], <span class="hljs-literal">NULL</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这是一个经过简化的伪代码，我还没试过是否能跑，这里只是为了展示大致逻辑</p>
+<p>这个程序最后也是在开发板上跑的，板子上是一块双核 arm 的 soc，运行内存大概是 250M，不过即使不在开发板上一些问题也能在其他平台复现，理解原理即可 (；</p>
+<h1>三个问题</h1>
+<h2 id="问题一：Abort">问题一：Abort</h2>
+<p>若尝试直接运行这个程序，会报 Mutex may not initialized before use 并 abort，可以尝试一下单看源码是否能找到问题所在</p>
+<blockquote>
+<p>Mutex 会被认为还没有被初始化，那也就是说程序在尝试调用这个 mutex 的时候发现那些字节并非正常，既然初始化后为何会被篡改了呢？谁又会去篡改这些字节呢？</p>
+<p>在跑多线程那段代码之前，看起来也就只有个标准创建子进程的部分，而且似乎没影响到任何多线程的部分啊</p>
+<p>其实，如果细看的话，这里创建子进程和平时创建子进程的方式好像有点不一样；这里没用平时常见的 <code>fork()</code> 而是 <code>vfork()</code></p>
+</blockquote>
+<p>什么是 <code>vfork()</code>，和学校里教的 <code>fork()</code> 又有什么不同？</p>
+<p>打开 <code>vfork()</code> 的 man pages，能看到他的描述和 <code>fork()</code> 几乎大差不差，但主要有两点不同：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>vfork()</code> 父进程会等子进程结束后再继续执行</p>
+</li>
+<li class="lvl-2">
+<p><code>vfork()</code> 子进程会在执行 <code>execve()</code> 之前和父进程共享地址空间</p>
+</li>
+</ul>
+<p>主要看第二点，man page 里也说了，如果 <code>vfork()</code> 的子进程不应该执行 <code>exit()</code> 否则会有未定义的行为</p>
+<p>上过系统编程课的话也知道，<code>exit()</code> 除了退出当前进程之外还会执行一些清理动作，例如关闭一些 fd</p>
+<p>在这个情况下，很明显一些 mutex 就因为这个 <code>exit()</code> 被清理掉了，之后程序尝试去调用就会发现是一堆垃圾字节，并怀疑 mutex 没有被正确的初始化</p>
+<p>修复这个问题也很简单，按照 man page 上说的一样正确使用 <code>_exit()</code> 直接退出即可</p>
+<h2 id="问题二：OOM">问题二：OOM</h2>
+<p>在修复 abort 的问题后，程序能正常运行</p>
+<p>那就试试开启 Asan 来检查有没有内存相关的问题吧</p>
+<p>启用 Asan 的 flag 来重新编译一遍，再次尝试在开发板上跑这个程序；不用几秒后，控制台就显示 OOM 并终止程序</p>
+<p>没开 Asan 时没问题，但开了后却报 OOM，Asan 明明是检查内存的工具，为啥反而还导致了内存问题呢？</p>
+<h3 id="Asan-为何物，这些功能是如何被实现的？">Asan 为何物，这些功能是如何被实现的？</h3>
+<p>Address Sanitizer 顾名思义为地址清洁器，专门用来找地址相关的 bug，例如 Use-After-Free (UAF)，buffer overflow（越界），memory leak，double free / invalid free 等</p>
+<p>那它又是如何实现这些检测的呢？</p>
+<p>Asan 主要有 3 种方式去检测不同的内存 bug，分别为 Redzone，Shadow Memory，和 Quarantine</p>
+<p><strong>Redzone</strong></p>
+<p>Asan 会于每个分配的内存区块（Stack，Heap，或 Global）周围划分为 Redzone，这样只要程序尝试存取 Redzone 范围的内存地址就能知道有越界情况了</p>
+<p><strong>Shadow Memory</strong></p>
+<p>Asan 会使用一部分内存作为 shadow bytes，用于表示这整块内存的状态</p>
+<p>通常一个 shadow byte 会表示真实内存的 8 个 bytes 的状态，是 fully addressable，partially addressable，还是 fully poisoned</p>
+<blockquote>
+<p>poisoned 顾名思义就是下了毒的内存区域，若尝试读取 Asan 就知道有不符合规范的内存读写了</p>
+</blockquote>
+<p>在每个内存读写之前，Asan 就会通过 Shadow Memory 检查一下这个内存块有没有问题</p>
+<p><strong>Quarantine</strong></p>
+<p>在 free 掉一个 heap 内存块后，正常来说这段内存会被释放回去一个内存池里，供下次 malloc 使用</p>
+<p>在 Asan 的实现里，为了检查是否有 UAF 的情况，free 完之后的内存并不会马上释放回池子里，而是将其 quarantine（隔离），过段时间后才真正释放</p>
+<p>隔离期间如果程序尝试再次读写该段内存，很明显就出现了 UAF</p>
+<hr>
+<p>好了，在知道 Asan 实现的大概原理后，OOM 的成因就应该十分明显：要实现 Shadow Memory 和 Quarantine，无非都是需要更多的空间来记录这些内存的 metadata</p>
+<p>正在 quarantine 的内存实际上也会被程序占用，malloc 不会从 quarantine 里找空闲内存，这个明显是内存占用的大头</p>
+<p>再在网上简单搜索一下即可得知，arm 上的 Asan 默认 quarantine 大小为 256M，开发板上只有不到 250M 的内存，最后俩个线程无限 malloc 和 free 只把内存放到 quarantine 里，并没真正释放出来；quarantine 还没满，系统就已经没有内存能安排给 malloc 了，只好报 OOM 并把程序杀掉</p>
+<p>解决方法很简单，把 quarantine 大小改小即可</p>
+<blockquote>
+<p>举一反三，除了 quarantine 之外，redzone 是否也有可能导致 OOM 呢？毕竟用了多点内存</p>
+<p>答案是有可能，不过 redzone 的大小也会根据申请的内存大小来决定；在这个样例里，16 bytes 的内存可能会有 4x 的膨胀，反而 4096 bytes 的只有大概 1.07x</p>
+<p>粗略估算，应该会膨胀个 20-30%，2 个线程各重复 20000 次 malloc，取均值每次分配 2056 bytes，总共也就 82 MB。如果把 redzone 的膨胀算上，那大概是 100-110 MB 左右</p>
+<p>开发板上有 250 MB 的内存，假设 OS 占用 30 MB，那剩下大概 220 MB 的空间，还要算上 shadow bytes 的占用，实际为 220 MB / 1.125 = 196 MB</p>
+<p>按照前面算的每次 malloc 平均大小，那总共需要 malloc 196 MB / 2310 Bytes = 85000 次 allocation，也就是每个线程要 malloc 42500 次以上</p>
+<p>修改数字为 50000，烧到开发板上测确实会有机会报 OOM，验证成功</p>
+</blockquote>
+<h2 id="问题三：性能瓶颈">问题三：性能瓶颈</h2>
+<p>最后俩个线程均为 while true 死循环，但看 top cpu 占用一直卡在 50%，无法占满，要找出性能瓶颈</p>
+<blockquote>
+<p>提示：这里样例程序编译时的依赖库为 uclibc，非 glibc</p>
+<p>如果熟悉 uclibc 和 glibc 的 malloc 实现的话其实这题挺明显的，不过人不可能了解所有情况，应该懂得用工具排查问题，这里想强调的是如何善用工具排查原因，再进行学习</p>
+</blockquote>
+<p>若要排查性能相关的问题，基本上都是 perf + 火焰图来解</p>
+<p>这个样例程序用 perf 来记录，然后 perf.unfold 再转换成 flamegraph 后可以看到，基本上都是 malloc 占用了最多的 cpu time（废话，这里就只有 <code>malloc</code> 能占用 cpu）</p>
+<p>这样子给出的信息有点局限了，那就继续看看 malloc 内部是什么原因造成性能问题</p>
+<p>如果要 perf 能把 library function 内部调用也展示出来，就得把依赖库的 debug symbol 也带上，重编 uclibc</p>
+<p>使用新的 uclibc 重跑样例程序，用 perf 检查 cpu time，这样我们就有更多的信息了</p>
+<p>看火焰图，依然是 <code>malloc</code> 占大头，不过内部也有不少调用占了很多时间，信息不多</p>
+<p>不过这次的 uclibc 有 debug symbol，能在 perf.unfold 文件里查看 backtrace</p>
+<p>找到 symbol name + offset，配合 gdb 得知样例程序的 <code>malloc</code> 其实用的是 uclibc <code>malloc-standard</code> 的实现（网上能查到 uclibc 有三个不同的 malloc 实现）</p>
+<p>那问题基本上就是这个 <code>malloc</code> 的实现了，让 ai 看看源代码，发现 <code>malloc-standard</code> 的实现利用了一个全局锁，也就是说样例程序两个线程的 <code>malloc</code> 同时只能有一个在跑</p>
+<p>前面的 20000 个批量 <code>malloc</code> 再隔个 free 产生了大量的内存碎片，<code>malloc</code> 每次申请内存用时变长，另一个线程的 <code>malloc</code> 需要花大量的时间等待这个线程的 <code>malloc</code> 释放锁</p>
+<p>cpu 刚好有两个核心，每个线程分配给了一个核，全局锁导致只有一个线程能跑（一个核），最后导致 cpu 总利用率只有 50%</p>
+<blockquote>
+<p>有没有解决办法呢？最简单的就是把依赖库换成 glibc 而不是 uclibc。glibc 的 <code>malloc</code> 实现和 uclibc 的 <code>malloc-standard</code> 不同，glibc 的 <code>malloc</code> 更好的支持多线程，每个线程有单独的 arena 来分配内存</p>
+<p>如果要坚持使用 uclibc 这个库，其实除了 <code>malloc-standard</code> 其他俩个库的实现也不会完全解决多线程的问题，要达到 glibc 的 <code>malloc</code> 效果只能手动修改 uclibc 的实现，使用类 glibc 单独给每个线程分配个 arena</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AC%94%E8%AE%B0/" class="category-chain-item">笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
+      
+        <a href="/tags/Intern/" class="print-no-link">#Intern</a>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/Asan/" class="print-no-link">#Asan</a>
+      
+        <a href="/tags/Perf/" class="print-no-link">#Perf</a>
+      
+        <a href="/tags/Embedding/" class="print-no-link">#Embedding</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Low-level Debug 笔记</div>
+      <div>https://blissfulalloy79.github.io/16-interndebug/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>BlissfulAlloy79</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/13-robomasteryc01/" title="RMYC-合24的一个初步尝试">
+                        <span class="hidden-mobile">RMYC-合24的一个初步尝试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-6bmghd4bb-blissfulalloy79.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="/js/blacklines.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
